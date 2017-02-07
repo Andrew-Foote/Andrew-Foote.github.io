@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>A2 Core Maths Unit 4</title>
+<link type="text/css" rel="stylesheet" href="maths-style.css"/>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" 
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full">
+</script>
+	</head>
+	<body>
+<h1>Straight line geometry</h1>
+
+<p>First we will examine some of the properties of straight lines. In terms of functions, a function can be said to plot a straight line if it is defined over all real numbers, and for every pair of points `x_1` and `x_2` in the real numbers, the following value is constant:</p>
+
+`(f(x_2) - f(x_1)) / (x_2 - x_1)`
+
+<p>This is the ratio of the change in the output of `f` to the change in the input; it is known as the <def>gradient</def> of `f`, and it can be given the symbol `m`. If `m` does not depend on the values of `x_1` and `x_2`, then by a simple rearrangement we see that</p>
+
+`f(x_2) - f(x_1) = m (x_2 - x_1)`
+
+<p>This is valid for any two values of `x_1` and `x_2`. Therefore we can use it to find a formula for the function. Let `x_1` and `f(x_1)` be any two specific real numbers, then for any `x`:</p>
+
+`f(x) - f(x_1) = m (x - x_1) => f(x) = m (x - x_1) + f(x_1)`
+
+<p>This is the straight line equation, although it's in a slightly inconvenient form. We can see that the value of `f(x)` depends only on `x_1`, `f(x_1)` and `m`. This means a straight line is uniquely defined by its gradient and a specific point which it passes through. A useful reference point is the point where the line cuts the y-axis, which is called its y-axis. We will give the name `c` to the y-coordinate here, while the x-coordinate will have to be zero. If `x = 0`, we can see that `f(x) = -m x_1 + f(x_1)`, so `c = f(x_1) - m x_1`. Using `c`, the equation becomes</p>
+
+`f(x) = m x - m x_1 + f(x_1) = m x + c`
+
+<p>It can be clearly seen from this equation that a straight line function is always a linear polynomial, except in the case where `m = 0`, where the equation is simply `f(x) = c`: the function always outputs the same constant. This means it's a polynomial with degree zero.</p>
+
+<h1>Derivatives</h1>
+
+<p>It would be useful to generalise the concept of a gradient to other functions. We proved that linear and constant polynomials are the only functions over all the real numbers with a constant gradient. But perhaps in other functions, the gradient would vary depending on your choice of values for `x_1` and `x_2`. If you look at the graph of a function like `x^2`, you can see that the change in `x^2` over a given horizontal distance is greater as you get further away from the y-axis.</p>
+
+<p>Defining this is tricky, however. Our formula for the gradient,</p>
+
+`m = (f(x_2) - f(x_1)) / (x_2 - x_1)`
+
+<p>depends on both `x_2` and `x_1`. So the gradient is only defined by this formula over a particular <em>interval</em>. We will call the size of this interval `Delta x`, so that `Delta x = x_2 - x_1`. Despite the slightly confusing notation, `Delta x` should be read as the single variable `Delta x` rather than the product of the variables `Delta` and `x`. If we rewrite the formula in terms of `x_1` and `Delta x` we get</p>
+
+`m = (f(x_1 + Delta x) - f(x_1)) / (Delta x)`
+
+<p>We want to be able to find the gradient of `f` as a function of the single variable `x_1`. Unfortunately, the value of `m` depends on `Delta x` as well. However, looking at a graph, it seems natural that if we make `Delta x` as small in magnitude as possible, the gradient will get closer and closer to an "exact" value. But we can't just substitute in `Delta x = 0`, since that makes `m` undefined.</p>
+
+<p>This is where hyperreals come in. Just let `Delta x` have any nonzero infinitesimal value. The value of `m` will still vary depending on which infinitesimal you choose&mdash;but for most functions, if you then take the standard part, you will get the same value for any infinitesimal value of `Delta x`. We call this value, `"st"(m)` where `m` is calculated using a nonzero infinitesimal value of `Delta x`, the <def>derivative</def> of `f` at `x_1`. Note that if different nonzero infinitesimal values of `Delta x` result in different values of `"st"(m)`, the derivative does not exist.</p>
+
+<p>In general, the derivative of a function `f` on the real numbers is a function on the real numbers itself, denoted by `fprime`, for which the following rule is true:</p>
+
+`fprime(x) = D <=> forall Delta x in RR^"*", ((Delta x approx 0 ^^ Delta x ne 0) => (f(x + Delta x) - f(x)) / (Delta x) approx D)`
+
+<p>For any point `c in RR`, if `fprime(c)` exists, then we say that `f` is <def>differentiable</def> at `c`. Differentiability of `f` at `c` therefore implies that</p>
+<ul>
+	<li>`f(c)` is defined and for all nonzero infinitesimal `Delta x`, `f(c + Delta x)` is defined; in other words, for all `x approx c`, `f(x)` is defined.</li>
+	<li>For all nonzero infinitesimal `Delta x`, `(f(c + Delta x) - f(c)) / (Delta x)` is infinitely close to some real number (and therefore finite).</li>
+</ul>
+
+<p>The following equation defines the derivative of `f` at `x`, <em>provided</em> that `f` is differentiable at `x`: for any infinitesimal `Delta x`,</p>
+
+`fprime(x) = "st"((f(x + Delta x) - f(x)) / (Delta x))`
+
+<p>It is important to remember that before finding the derivative with this equation, you must show that the function is differentiable at the given point. If you're trying to find a formula for the derivative as a function, you must find the set of real numbers where the function is differentiable first.</p>
+
+<p>For any straight line function `f`, which means that `forall x in RR, f(x) = m x + c` for some constants `m` and `c`, the derivative can be shown to be `m`, as you would expect, since that's the gradient. For any nonzero infinitesimal value of `Delta x`, the equation for the derivative works out as</p>
+
+`fprime(x) = "st"((m (x + Delta x) + c - (m x + c)) / (Delta x)) = "st"((m x + m Delta x + c - m x - c) / (Delta x)) = "st"((m Delta x) / (Delta x)) = "st"(m) = m`
+
+<p>Here's a simple example of a more useful derivative. If `f(x) = x^2`, and the domain of `f` is `RR`, then `fprime` also has domain `RR` and its formula is `fprime(x) = 2 x`. The proof: for all `x in RR`, `f(x) = x^2` is defined. We can simplify `m`: `(f(x + Delta x) - f(x)) / (Delta x) = ((x + Delta x)^2 - x^2) / (Delta x) = (x^2 + 2 x Delta x + Delta x^2 - x^2) / (Delta x) = (2 x Delta x + Delta x^2) / (Delta x) = 2 x + Delta x`. This reasoning is valid for any nonzero value of `Delta x`, infinitesimals included, and `2 x + Delta x approx 2 x` regardless of the value of `Delta x`. Therefore `fprime(x) = 2 x`.</p>
+
+<h2>Independent and dependent variables</h2>
+
+<p>In this section we will refer to `f(x)` as `y` for a given `f` and `x`. `y` is a variable dependent on `x` only. When you talk about the derivative of a variable rather than a function, make sure you note which other variables the variable is dependent on, because the derivative only makes sense as a relation between two variables, where one variable is expressed as a function of the other. Just saying "the derivative of `y`" has no meaning; say "the derivative of `y` with respect to `x`".</p>
+
+<p>Just as the change in `x` is called `Delta x`, we call the change in `y` for a given change in `x` `Delta y`, so that `Delta y = f(x + Delta x) - f(x)`. `Delta y` depends on both `x` and `Delta x`. Another name for it is the <def>increment</def> of `y`. Using `Delta y`, the derivative equation simplifies to `fprime(x) = "st"((Delta y) / (Delta x))`. Note that `Delta y` is a different number depending on which infinitesmal value of `Delta x` you use.</p>
+
+<p>Traditionally the derivative of `y` with respect to `x`, as a function, was expressed as a ratio `(d y) / (d x)`. `"st"((Delta y) / (Delta x))` is almost a ratio, but the standard part gets in the way. If we want to write it as a ratio, we will have to define that for any `x` where `f` is differentiable, for a given nonzero infinitesimal `Delta x`, `d y = fprime(x) Delta x` and `d x = Delta x`, and then `(d y) / (d x) = (fprime(x) Delta x) / (Delta x) = fprime(x)`. `d y` is called the <def>differential</def> of `y` with respect to `x`. Like the increment, it depends on the value of `Delta x`.</p>
+
+<p>Defining `d y` like this might seem pointless, but it actually has a neat geometric interpretation. It's actually the derivative of the tangent to the function at a given point, taken at that same point. In terms of circles, a tangent is a straight line that passes through a single point on the circle. The idea of a tangent is slightly different with functions in general, since it may pass through any number of points on a function. The tangent to a function `f` at a point `c` is simply the straight line that passes through `(c, f(c))` and has the same derivative as `f` at `c`. A straight line function is determined by its gradient (same as the derivative for a straight line) and any point it passes through, so this allows us to write an equation for the tangent function, `t : RR -> RR`:</p>
+
+`forall x in RR, t(x) - f(c) = fprime(c) (x - c) => forall x in RR, t(x) = fprime(c) (x - c) + f(c)`
+
+<p>We already know that the derivative of this function at `c` is `fprime(c)`. But as it is a straight line, that is also the value of `m = {:Delta t(x) |_(x = c):} / (Delta x)`, where `Delta t(x) |_(x = c)` is the increment of `t(x)` at `c`, for any nonzero value of `Delta x`. So rearranging this we see that:</p>
+
+`{: Delta t(x)_(Delta x) |_(x = c):} = m Delta x = fprime(c) Delta x = {: d f(x) |_(x = c) :}`
+
+<p>where `d f(x) |_(x = c)` is the differential of `f(x)` at `c`. So the differential of `f(x)` is the increment of `t(x)`, i.e. the change in the height of the tangent at `x` for an infinitesimal change in `x`.</p>
+
+<p>The relationship between the differential and the increment of the same function is given by the Increment Theorem, which is very easy to prove. Suppose a function `f` is differentiable at `x`. Then for any nonzero infinitesimal `Delta x`, `fprime(x) approx (Delta f(x)) / (Delta x)`, so then for some infinitesimal `epsilon`, `fprime(x) + epsilon = (Delta f(x)) / (Delta x)`. Rearranging this, we see that</p>
+
+`Delta f(x) = Delta x (fprime(x) + epsilon) = fprime(x) Delta x + epsilon Delta x = d f(x) + epsilon Delta x`
+
+<p>So for a given infinitesimal value of `Delta x`, the increment of `f(x)` is infinitely close to `d f(x)` and crucially, if you divide the infinitesimal difference between `Delta f(x)` and `d f(x)` by `Delta x`, the result is still infinitesimal. This is not guaranteed for infinitesimals generally (e.g. `(Delta x) / (Delta x) = 1`) so this is useful information.</p>
+
+<h2>Properties of derivatives</h2>
+
+<p>In this section we will find some general properties of derivatives which will allow us to calculate them quite quickly. Note that we will use the notation `d tau(x)`, where `tau` is a mathematical expression using the variable `x`, to concisely express the differential `d y` with respect to `x` where `y` is defined by the equation `y = tau(x)`. We will also use `Delta tau(x)` for increments in a similar way. This is just a way of saving space. It can be misleading; for example you might think it would be obvious that `(d x) / (d x) = 1`. It actually does as you will see, but the `d x` on the bottom is an arbitrary infinitesimal, and the `d x` on the top here is `d y` with respect to `x` where `y` is defined by `y = x`. It is not obvious that these are the same quantity, and we haven't proved that `d y` exists either (we would need to show that when `y = x`, `(d y) / (d x)` is differentiable).</p>
+
+<p>Also, note that when `tau` contains a fraction, we may separate it out of the main derivative fraction, as in `d / (d x) 1 / x` for `(d y) / (d x)` where `y = 1 / x`.</p>
+
+<h3>The constant factor rule</h3>
+
+<p>If `f` is a function which is differentiable at `c`, then for any real constant `k`, `(d k f(x)) / (d x) = k (d f(x)) / (d x)` at `c`. As a formal statement:</p>
+
+`(exists fprime(c) ^^ exists k in RR, (forall x approx c, g"*"(x) = k f"*"(x))) => gprime(c) = k fprime(c)`
+
+<p>Proof: let `f` be a function differentiable at `c`. Then for any nonzero infinitesimal `Delta x`,</p>
+
+`{: Delta k f(x) |_(x = c) = k f(c + Delta x) - k f(c) = k (f(c + Delta x) - f(c)) = k {: Delta f(x) |_(x = c)`
+
+<p>Therefore</p>
+
+`"st"({: Delta k f(x) |_(x = c):} / (Delta x)) = "st"({: k Delta f(x) |_(x = c):} / (Delta x)) = "st"(k) "st"({: Delta f(x) |_(x = c):} / (Delta x)) = k {: (d f(x)) / (d x) |_(x = c)`
+
+<p>so the function with the formula `k f(x)` is differentiable wherever `f` is differentiable, and the derivative is `k {: (d f(x)) / (d x) |_(x = c)`.</p>
+
+<h3>The sum rule</h3>
+
+<p>If `f` and `g` are functions which are differentiable at `c`, then `(d (f(x) + g(x))) / (d x) = (d f(x)) / (d x) + (d g(x)) / (d x)` at `c`. As a formal statement:</p>
+
+`(exists fprime(c) ^^ exists gprime(c) ^^ forall x approx c, h"*"(x) = f"*"(x) + g"*"(x)) => hprime(c) = fprime(c) + gprime(c)`
+
+<p>Proof: let `f` and `g` be functions differentiable at `c`, then for any nonzero infinitesimal `Delta x`,</p>
+
+`{: Delta (f(x) + g(x)) |_(x = c) = f(c + Delta x) + g(c + Delta x) - (f(c) + g(c)) = f(c + Delta x) - f(c) + g(c + Delta x) - g(c)`
+`= {: Delta f(x) |_(x = c) + {: Delta g(x) |_(x = c)`
+
+<p>Therefore</p>
+
+`"st"({: Delta (f(x) + g(x)) |_(x = c):} / (Delta x)) = "st"(({: Delta f(x) |_(x = c):} + {: Delta g(x) |_(x = c):}) / (Delta x)) =`
+`"st"({: Delta f(x) |_(x = c):} / (Delta x)) + "st"({: Delta g(x) |_(x = c):} / (Delta x)) = {: (d f(x)) / (d x) |_(x = c) + {: (d g(x)) / (d x) |_(x = c)`
+
+<p>so the function with the formula `f(x) + g(x)` is differentiable wherever both `f` and `g` are differentiable, and the derivative is `{: (d f(x)) / (d x) + |_(x = c) + {: (d g(x)) / (d x) |_(x = c)`.</p>
+
+<h3>The difference rule</h3>
+
+<p>This is a simple corollary of the above two rules, saying that if `f` and `g` are differentiable at `c`, then `(d (f(x) - g(x))) / (d x) = (d f(x)) / (d x) - (d g(x)) / (d x)` at `c`. In logical terms:</p>
+
+`(exists fprime(c) ^^ exists gprime(c) ^^ forall x approx c, h"*"(x) = f"*"(x) + g"*"(x)) => hprime(c) = fprime(c) + gprime(c)`
+
+<p>It can be very easily proven:</p>
+
+`(d (f(x) - g(x))) / (d x) = (d (f(x) + (-g(x)))) / (d x) = (d f(x)) / (d x) + (d (-g(x))) / (d x) = (d f(x)) / (d x) - (d g(x)) / (d x)`
+
+<h3>The product rule</h3>
+
+<p>If `f` and `g` are functions which are differentiable at `c`, then `(d f(x) g(x)) / (d x) = g(x) (d f(x)) / (d x) + f(x) (d g(x)) / (d x)` at `c`. In logical terms:</p>
+
+`(exists fprime(c) ^^ forall x approx c, h"*"(x) = (f"*"(x) g"*"(x))) => hprime(c) = g(c) fprime(c) + f(c) gprime(c)`
+
+<p>Proof: let `f` and `g` be functions differentiable at `c`. Then for any nonzero infinitesimal `Delta x`,</p>
+
+`{: Delta (f(x) g(x)) |_(x = c):} = f(x + Delta x) g(x + Delta x) - f(x) g(x)`
+
+<p>Also, `{: Delta f(x) |_(x = c):} = f(x + Delta x) - f(x) => f(x + Delta x) = {: Delta f(x) |_(x = c):} + f(x)`. Similarly `{: Delta g(x) |_(x = c):} = g(x + Delta x) - g(x) => g(x + Delta x) = {: Delta g(x) |_(x = c):} + g(x)`. Substituting in these values,</p>
+
+`{: Delta (f(x) g(x)) |_(x = c):} = ({: Delta f(x) |_(x = c):} + f(x))({: Delta g(x) |_(x = c):} + g(x)) - f(x) g(x) =`
+`{: Delta f(x) |_(x = c):} {: Delta g(x) |_(x = c):} + g(x) {: Delta f(x) |_(x = c):} + f(x) {: Delta g(x) |_(x = c):} + f(x) g(x) - f(x) g(x) =`
+`{: Delta f(x) |_(x = c):} {: Delta g(x) |_(x = c):} + g(x) {: Delta f(x) |_(x = c):} + f(x) {: Delta g(x) |_(x = c):}`
+
+<p>Therefore</p>
+
+`"st"({: Delta (f(x) g(x)) |_(x = c):} / (Delta x)) = "st"(({: Delta f(x) |_(x = c):} {: Delta g(x) |_(x = c):}) / (Delta x)) + g(x) "st" ({: Delta f(x) |_(x = c):} / (Delta x)) + f(x) "st" ({: Delta g(x) |_(x = c):} / (Delta x))`
+`= "st"(({: Delta f(x) |_(x = c):} {: Delta g(x) |_(x = c):}) / (Delta x)) + g(x) {: (d f(x)) / (d x) |_(x = c):} + f(x) {: (d g(x)) / (d x) |_(x = c):}`
+
+<p>Due to the Increment Theorem, `{: Delta f(x) |_(x = c):} = fprime(c) Delta x + epsilon Delta x` for some infinitesimal `epsilon`. That means `{: Delta f(x) |_(x = c):}` is infinitesimal, so its standard part is zero, and we can break the first term up into `"st"({: Delta f(x) |_(x = c):}) "st"({: Delta g(x) |_(x = c):} / (Delta x)) = 0 * {: (d g(x)) / (d x) |_(x = c):} = 0`. So the function with the formula `f(x) g(x)` is differentiable wherever both `f` and `g` are differentiable, and the derivative is `g(x) {: (d f(x)) / (d x) |_(x = c):} + f(x) {: (d g(x)) / (d x) |_(x = c):}`.</p>
+
+<h3>The quotient rule</h3>
+
+<p>Remember that the derivative of a constant function is 0. Well, if we multiply together the nonzero output of a function `f(x)` and the output of a function defined by the formula `1 / f(x)`, we will get 1, which has the derivative zero. Using the product rule, this allows us to form an equation involving `d / (d x) 1 / f(x)` and `(d f(x)) / (d x)`, which we can solve to find a rule for the derivative of the reciprocal of a function.</p>
+
+`(d 1) / (d x) = d / (d x) (f(x)) / (f(x)) = f(x) d / (d x) 1 / f(x) + 1 / f(x) (d f(x)) / (d x) = 0`
+
+<p>So, rearranging this:</p>
+
+`f(x) d / (d x) 1 / f(x) = -1 / f(x) (d f(x)) / (d x) => d / (d x) = -1 / (f(x))^2 (d f(x)) / (d x)`
+
+<p>This shows that for any function `f` differentiable at `c` such that `f(c) ne 0`, `d / (d x) 1 / (f(x)) = -1 / (f(x))^2 (d f(x)) / (d x)` at `c`. In words, the derivative of a variable's reciprocal is the derivative of the variable divided by the square of the variable and negated. As a logical statement:</p>
+
+`(exists fprime(c) ^^ forall x approx c, g"*"(x) = 1 / (f"*"(x))) => gprime(c) = -(fprime(c)) / (f(c))^2`
+
+<p>By combining this with the product rule we can now state the rule for the derivative of any ratio of two functions, `(f(x)) / (g(x))`, where `g(x) ne 0` and `f` and `g` are differentiable.</p>
+
+`d / (d x) (f(x)) / (g(x)) = 1 / (g(x)) (d f(x)) / (d x) + f(x) d / (d x) 1 / (g(x)) = 1 / (g(x)) (d f(x)) / (d x) - (f(x)) / (g(x))^2 (d g(x)) / (d x) = (g(x) (d f(x)) / (d x) - f(x) (d g(x)) / (d x)) / (g(x))^2`
+
+<p>This shows us that if `f` and `g` are functions which are differentiable at `c`, and `f(c) ne 0`, then `d / (d x) (f(x)) / (g(x)) = (g(x) (d f(x)) / (d x) - f(x) (d g(x)) / (d x)) / (g(x))^2` at `c`. This is called the quotient rule. In logical terms, it means:</p>
+
+`(exists fprime(c) ^^ forall x approx c, h"*"(x) = (f"*"(x)) / (g"*"(x))) => hprime(c) = (g(c) fprime(c) - f(c) gprime(c)) / (g(c))^2`
+
+<h3>The power rule</h3>
+
+<p>With these rules, we are almost able to differentiate any rational function, i.e. any ratio of polynomials. The problem is, we don't have a general rule for the derivative of `x` to a certain power. We know that the derivative of a constant is zero, so `(d x^0) / (d x) = (d 1) / (d x) = 0`, and the derivative of a straight line `m x + c` is `m`, so `(d x^1) / (d x) = (d x) / (d x) = 1`. We also worked out that the derivative of `x^2` was `2 x`. In fact, we can easily work out every individual higher integer power's derivative by the product rule:</p>
+
+`(d x^2) / (d x) = (d (x * x)) / (d x) = x (d x) / (d x) + x (d x) / (d x) = x + x = 2 x`<br>
+`(d x^3) / (d x) = (d (x * x^2)) / (d x) = x^2 (d x) / (d x) + x (d x^2) / (d x) = x^2 + 2 x^2 = 3 x^2`<br>
+`(d x^4) / (d x) = (d (x * x^3)) / (d x) = x^3 (d x) / (d x) + x (d x^3) / (d x) = x^3 + 3 x^3 = 4 x^3`
+
+<p>It's pretty easy to see the pattern here. It seems that at least for positive integer values of `n`, `(d x^n) / (d x) = n x^(n - 1)`. This still applies when `n = 1` or `n = 0`: `(d x) / (d x) = 1 * x^0 = 1`, and `(d 1) / (d x) = 0 * x^-1 = 0`. To make this into rigorous proof, we can use the principle of induction. We know the rule is valid for `n = 0` and `n = 1`. Now given any `n in NN` for which the rule applies (`(d x^n) / (d x) = n x^(n - 1)`):</p>
+
+`(d x^(n + 1)) / (d x) = (d (x * x^n)) / (d x) = x^n (d x) / (d x) + x (d x^n) / (d x) = x^n + x * n x^(n - 1) = x^n + n x^n = (n + 1) x^n`
+
+<p>This shows that the rule also applies to `n + 1`, which means `(d x^n) / (d x) = n x^(n - 1)` is valid for all `n in NN`.</p>
+
+<p>If the power is negative, we can use the reciprocal rule: for any `n in NN`,</p>
+
+`(d x^-n) / (d x) = d / (d x) 1 / x^n = -1 / (x^n)^2 (d x^n) / (d x) = -(n x^(n - 1)) / x^(2 n) = -n x^(n - 1 - 2 n) = -n x^(-n - 1)`
+
+<p>Substitute `m = -n` into this result, and we get `(d x^m) / (d x) = m x^(m - 1)` for any negative `m`, and therefore the power rule also holds for negative powers.</p>
+
+<p>We can show that it also holds for any rational power, but we will need to prove some other things. Still, now that we know the power rule applies to any integer exponent, we can differentiate any polynomial, such as `x^2 + 4 x + 2` (`2 x + 4`), `3 x^3 - 4 x^4` (`9 x^2 - 16 x^3`), or `1 - x^2 / 2` (`-x`).</p>
+<h3>Differentiation of sums and products</h3>
+
+<p>The sum rule quite easily generalises to sums of an arbitrary number of terms. We can use a proof by induction. If we have a series of `n` functions, numbered `f_k` where `k` is a positive integer between 1 and `n`, then we expect that</p>
+
+`d / (d x) sum_(k = m)^n f_k(x) = sum_(k = m)^n (d f_k(x)) / (d x)`
+
+<p>This can be proved with a simple proof by induction: `d / (d x) sum_(k = m)^m f_k(x) = (d f_k(x)) / (d x) = sum_(k = m)^m (d f_k(x)) / (d x)`, and if `d / (d x) sum_(k = m)^n f_k(x) = sum_(k = m)^n (d f_k(x)) / (d x)` for some `n`, then `d / (d x) sum_(k = m)^(n + 1) f_k(x) = d / (d x) (f_(n + 1)(x) + sum_(k = m)^n f_k(x)) = (d f_(n + 1)(x)) / (d x) + d / (d x) sum_(k = m)^n f_k(x) = (d f_(n + 1)(x)) / (d x) + sum_(k = m)^n (d f_k(x)) / (d x) = sum_(k = m)^(n + 1) (d f_k(x)) / (d x)`.</p>
+
+<p>A more complicated one is the product rule over a product of arbitrary length. Using the product rule we know that</p>
+
+`(d u v) / (d x) = v (d u) / (d x) + u (d v) / (d x)`
+
+<p>Therefore, if we add a third factor:</p>
+
+`(d u v w) / (d x) = w (d u v) / (d x) + u v (d w) / (d x) = w (v (d u) / (d x) + u (d v) / (d x)) + u v (d w) / (d x) = w v (d u) / (d x) + w u (d v) / (d x) + u v (d w) / (d x)`
+
+<p>And if we add a fourth:</p>
+
+`(d u v w y) / (d x) = y (d u v w) / (d x) + u v w (d y) / (d x) = y (w v (d u) / (d x) + w u (d v) / (d x) + u v (d w) / (d x)) + u v w (d y) / (d x) = y w v (d u) / (d x) + y w u (d v) / (d x) + y u v (d w) / (d x) + u v w (d y) / (d x)`
+
+<p>It's fairly easy to see the pattern here. You add up the derivatives of each factor multiplied by all the other factors. This suggests that</p>
+
+`d / (d x) prod_(k = m)^n f_k(x) = sum_(k = m)^n prod_(h = m)^n f_h^((E(k, h)))(x)`
+
+<p>where `E` is a function on two variables defined like so:</p>
+
+`E(k, h) = {(1, if h = k),(0, if h ne k):}`
+
+<p>`f^((n))` where `n` is any positive integer is a notation used to indicate how many times a function should be differentiated. We will go into more detail about this in the next section. `f^((0)) = f`, while `f^((1)) = fprime`, so the notation `f^((E(k, h)))` means the derivative of `f` when `h = k`, and just `f` when `h ne k`.</p>
+
+<p>We can now prove the rule by induction. First, we will show that it works when `n = m`:</p>
+
+`d / (d x) prod_(k = m)^m f_k(x) = (d f_m(x)) / (d x) = f_m^((1))(x)`<br>
+`sum_(k = m)^m prod_(h = m)^m f_h^((E(k, h)))(x) = f_m^((E(m, m)))(x) = f_m^((1))(x)`<br>
+
+<p>Now suppose that it works for any `n`. To prove the rule, we will have to show that</p>
+
+`d / (d x) prod_(k = m)^(n + 1) f_k(x) = sum_(k = m)^(n + 1) prod_(h = m)^(n + 1) f_h^((E(k, h)))(x)`
+
+<p>We will rewrite both sides of the equation in turn to show that they are equal. First, taking the left side, we will take the last factor out of the product:</p>
+
+`d / (d x) prod_(k = m)^(n + 1) f_k(x) = d / (d x) (f_(n + 1)(x) prod_(k = m)^n f_k(x)) = (d f_(n + 1)(x)) / (d x) prod_(k = m)^n f_k(x) + f_(n + 1)(x) d / (d x) prod_(k = m)^n f_k(x) =`
+`f_(n + 1)^((1))(x) prod_(k = m)^n f_k(x) + f_(n + 1)(x) sum_(k = m)^n prod_(h = m)^n f_h^((E(k, h)))(x) = f_(n + 1)^((1))(x) prod_(k = m)^n f_k(x) + sum_(k = m)^n f_(n + 1)(x) prod_(h = m)^n f_h^((E(k, h)))(x)`
+
+<p>Now, let's take a term out of the sum on the right side:</p>
+
+`sum_(k = m)^(n + 1) prod_(h = m)^(n + 1) f_h^((E(k, h)))(x) = prod_(h = m)^(n + 1) f_h^((E(n + 1, h)))(x) + sum_(k = m)^n prod_(h = m)^(n + 1) f_h^((E(k, h)))(x)`
+
+<p>The two expressions are starting to look pretty similar. All we need to do is take a further term out of these products:</p>
+
+`prod_(h = m)^(n + 1) f_h^((E(n + 1, h)))(x) + sum_(k = m)^n prod_(h = m)^(n + 1) f_h^((E(k, h)))(x) =`
+`f_(n + 1)^((E(n + 1, n + 1)))(x) prod_(h = m)^n f_h^((E(n + 1, h)))(x) + sum_(k = m)^n f_(n + 1)^((E(k,n + 1)))(x) prod_(h = m)^n f_h^((E(k, h)))(x) =`
+`f_(n + 1)^((1))(x) prod_(h = m)^n f_h(x) + sum_(k = m)^n f_(n + 1)(x) prod_(h = m)^n f_h^((E(k, h)))(x)`
+
+<p>We have been able to simplify `prod_(h = m)^n f_h^((E(n + 1, h))(x)` to `prod_(h = m)^n f_h(x)` here, since the counter `h` in this product only went up to `n`, so obviously it would never equal `n + 1`. A similar logic was used to make the other simplification seen in the last line here. Now our expressions are almost identical; all we need to do to complete the proof is to give the counters in the product in the first term of each expression the same name. There is no problem in doing this, so we have confirmed that if `d / (d x) prod_(k = m)^n f_k(x) = sum_(k = m)^n prod_(h = m)^n f_h^((E(k, h)))(x)`, then `d / (d x) prod_(k = m)^(n + 1) f_k(x) = sum_(k = m)^(n + 1) prod_(h = m)^(n + 1) f_h^((E(k, h)))(x)`. This confirms the rule, which we will call the <def>multiple product rule</def>.</p>
+
+<p>The function `E(k, h)` can be expressed in elementary terms as `0^|k - h|`, since `0^0 = 1` while `0^n = 0` if `n` is any other positive integer. So we can restate the rule again, using this, as</p>
+
+`forall n in NN, d / (d x) prod_(k = m)^n f_k(x) = sum_(k = m)^n prod_(h = m)^n f_h^((0^|k - h|))(x)`
+
+<p>An equivalent formulation of the rule is</p>
+
+`forall n in NN, d / (d x) prod_(k = m)^n f_k(x) = (prod_(h = m)^n f_h(x)) (sum_(k = m)^n (f_kprime(x)) / (f_k(x)))`
+
+<p>which can be proved by distributing the product through the sum:</p>
+
+`(prod_(h = m)^n f_h(x)) (sum_(k = m)^n (f_kprime(x)) / (f_k(x))) = sum_(k = m)^n (f_kprime(x)) / (f_k(x)) prod_(h = m)^n f_h(x)`
+
+<p>You can see that `prod_(h = m)^n f_h(x)` will have `f_kprime(x)` added to it while `f_k(x)` will be cancelled out.</p>
+
+<p>We can use this to prove the power rule for rational exponents. We know that `prod_(k = 1)^n x^(m/n) = (x^(m/n))^n = x^m`. This allows us to find a formula involving `(d x^(m/n)) / (d x)` for any positive integer `n`.</p>
+
+`prod_(k = 1)^n x^(m/n) = x^m => d / (d x) prod_(k = 1)^n x^(m/n) = (d x^m) / (d x) = m x^(m - 1)`
+
+<p>Now, we can use quite a simplified version of the multiple product since the multiple products here are all exactly the same. In that case we can write the multiple product rule as</p>
+
+`d / (d x) prod_(k = m)^n f(x) = (prod_(h = m)^n f(x)) (sum_(k = m)^n (fprime(x)) / (f(x)))`
+
+<p>which simplifies to, if we let `m = 1`:</p>
+
+`d / (d x) (f(x))^n = (f(x))^n n (fprime(x)) / (f(x)) = (n (f(x))^n fprime(x)) / (f(x))`
+
+<p>So now we can say that</p>
+
+`d / (d x) prod_(k = 1)^n x^(m/n) = d / (d x) (x^(m/n))^n = (n (x^(m/n))^n) / (x^(m/n)) (d x^(m/n)) / (d x) = (n x^m) / (x^(m/n)) (d x^(m/n)) / (d x)`
+
+<p>Therefore</p>
+
+`(n x^m) / (x^(m/n)) (d x^(m/n)) / (d x) = m x^(m - 1)`
+
+<p>so by rearranging the equation, we see that</p>
+
+`(d x^(m/n)) / (d x) = (m x^(m - 1) x^(m / n)) / (n x^m) = m / n x^(m - 1 + m / n - m) = m / n x^(m / n - 1)`
+
+<p>which tells that rational powers, like integers, obey the power rule. This means the power rule is really valid for any power of `x`&mdash;we have defined exponentiation so far only for rational exponents, and when we extend it to other kinds of numbers, we will make sure the power rule still applies.</p>
+
+<h3>Higher derivatives</h3>
+
+<p>In the previous section we came across the notation `f^((n))` for the <var>n</var><sup>th</sup> derivative of `f`, so that `f^((0)) = f`, `f^((1)) = fprime`, `f^((2)) = fprimeprime`, and so on. We can also use a version of the `(d y) / (d x)` notation for higher derivatives. The <var>n</var><sup>th</sup> derivative of `y` is written `(d^n y) / (d x^n)`, and the <var>n</var><sup>th</sup> differential of `y` is written `d^n y` and its value is `f^((n)) d x^n`, where `d x` is an arbitrary infinitesimal. Having `d x^n` here rather than `d x` doesn't really make any difference; it's still an arbitrary infinitesimal; it's just to make the notation consistent.</p>
+
+<p>Sometimes we can find general expressions for the <var>n</var><sup>th</sup> derivative of a function. Let's try doing that with the power rule, since it will prove to be quite useful later on. If `f = x^n`, let's examine its derivatives; we can easily find each new derivative using the constant factor rule.</p>
+
+`f^((0))(x) = x^n`<br>
+`f^((1))(x) = n x^(n - 1)`<br>
+`f^((2))(x) = n (n - 1) x^(n - 2)`<br>
+`f^((3))(x) = n (n - 1) (n - 2) x^(n - 3)`
+
+<p>The pattern here is clear: `(d^k x^n) / (d x^k) = n^(ul k) x^(n - k)`, where `n^(ul k)` is called the <def>falling factorial power</def> of `n` to the power `k`. Just as `n^k` is the product of <var>k</var> <var>n</var>s when `k` is a natural number, `n^(ul k)` is the product of <var>k</var> <var>n</var>s, but every <var>n</var> in this product had a unique on-negative integer less than `k` subtracted from it. So `n^(ul k) = n (n - 1) (n - 2) ... (n - (k - 1))`. Formally, `n^(ul k)` can be defined recursively as</p>
+
+`n^(ul 0) = 1`
+`n^(ul (k + 1)) = n^(ul k) (n - k)`
+
+<p>To prove the rule, we'll use another inductive proof. First, we will show that `(d^0 x^n) / (d x^0) = x^n = n^(ul 0) x^(n - 0)`. So the rule applies when `n = 0`. And if the rule applies for a given `k`, then `(d^(k + 1) x^n) / (d x^(k + 1)) = d / (d x) (d^k x^n) / (d x^k) = (d n^(ul k) x^(n - k)) / (d x)`. We can use the constant factor rule to make this `n^(ul k) (d^k x^(n - k)) / (d x)`, and then using the power rule, we see that it's `n^(ul k) (n - k) x^(n - k - 1)`. From the definition of `n^(ul k)`, we can simplify this to `n^(ul (k + 1)) x^(n - (k + 1))`, which shows that the rule still holds for `k + 1`, and so proves that</p>
+
+`(d^k x^n) / (d x^k) = n^(ul k) x^(n - k)`
+
+<p>Note that if `n` is a positive integer, then `n^(ul k) = 0` when `k > n`, since `n^(ul k) = n^(ul (k - 1)) (n - (k - 1)) = 0` when `n = k - 1 => k = n + 1`, and if `n^(ul k) = 0` for some `k`, then `n^(ul (k + 1)) = n^(ul k) (n - k) = 0`. This means that repeatedly taking the derivative of a polynomial results in you eventually getting to zero.</p>
+
+<h3>The chain rule</h3>
+
+<p class="tbc">to be completed</p>
+
+<!--
+<p>The chain rule is a very powerful rule of differentiation that relates the derivative of the composition of two functions to the derivatives of the component functions. The composition of two functions `f` and `g` is denoted `g @ f`, and it is a defined by the formula `(g @ f)(x) = g(f(x))`. So using the chain rule, we could find the derivative of functions like `2 / (x^2 + 1)` quite quickly (you could use the quotient rule but it would be cumbersome).</p>
+
+<p>The actual chain rule says the following. If `f` is differentiable at `c` and `g` is differentiable at `f(c)`, then the derivative of `g @ f` at `c` is equal to `f'(c) g'(f(c))`, i.e. the derivative of `g`, the inner function, at `c` multiplied by the derivative of `g` at `f(c)`. In differential terms, we can say that `(d g(f(x))) / (d x) = (d f(x)) / (d x) (d g(f(x))) / (d f(x))`. The differential notation makes this look obvious&mdash;the `d g(x)` differential can be seen as cancelling out. In logical terms, the chain rule says</p> 
+
+`(exists fprime(c) ^^ exists gprime(f(c)) ^^ h = f @ g) => hprime(c) = fprime(c) gprime(f(c))`
+
+<p>We may prove the chain rule like this. Consider the difference quotient for the derivative of `g @ f` at `c`, i.e.
+
+`(g(f(c + Delta x)) - g(f(c)) / (Delta x)`
+
+<p>where `Delta x` is an infinitesimal. Either `f(c + Delta x) = f(c)`, in which case the difference quotient is zero, or `f(c + Delta x) ne f(c)`, in which case we can rewrite the difference quotient as</p>
+
+`(g(f(c + Delta x)) - g(f(c)) / (Delta x) = (g(f(c + Delta x)) - g(f(c)) / (f(c + Delta x) - f(c)) (f(c + Delta x) - f(c)) / (Delta x)`
+
+<p>The `f(c + Delta x) - f(c)` parts will cancel out if you simplify this expression, showing that it is equal to what we had before. Now, if `f` has a derivative at `c` then the standard part of the second factor here is just the derivative of of `f(c)`. As for the first factor, the increment theorem says that given that `f` has a derivative at `c`, `f(c + Delta x) - f(c) = fprime(c) Delta x + epsilon Delta x` for some infinitesimal `epsilon`. Therefore `f(c + Delta x) - f(c)` is infinitesimal. Also, if `g` is differentiable at `f(c)` then `gprime(f(c)) = "st"((g(f(c + Delta x)) - g(f(c))) / (Delta x))` for any infinitesimal `Delta x`.</p>
+
+<p>The crucial step to take is to realise that `f(c + Delta x) - f(c)` is therefore one of those values for which the equation holds, i.e. `gprime(f(c)) = "st"((g(f(c + f(c + Delta x) - f(c))) - g(f(c))) / (f(c + Delta x) - f(c))`. </p>
+
+
+then `g(f(c + Delta x)) - g(f(c)) = gprime(f(c)) Delta x + delta Delta x` for some infinitesimal `delta`, given any infinitesimal `Delta x`. Crucially, this means `f(c + Delta x) - f(c)` is a possible value of `Delta x`. So `g(f(c + Delta x)) - g(f(c)) = gprime(f(c)) (f(c + Delta x)`
+
+<p>The chain rule can be proved using the increment theorem. First, note that if `f` is differentiable at `c` and `g` is differentiable at `f(c)`, then `{: Delta f(x) |_(x = c):}` and `{: Delta g(x) |_(x = f(c)):}` are infinitesimal due to the increment theorem for any nonzero infinitesimal `Delta x`. Also, for any nonzero infinitesimal `Delta x`, `{: Delta g(x) |_(x = f(c)):} = gprime(f(c)) Delta x + epsilon Delta x` for some infinitesimal `epsilon`.</p>
+
+<p>The key insight is this: `{: Delta f(x) |_(x = c):}` is one such nonzero infinitesimal, so `{: Delta g(x) |_(x = f(c)):} = gprime(f(c)) {: Delta f(x) |_(x = c):} + epsilon {: Delta f(x) |_(x = c):}`. Therefore for all infinitesimal `Delta x`, `"st"({: Delta g(x) |_(x = f(c)):} / (Delta x)) = "st"(gprime(f(c)) {: Delta f(x) |_(x = c):} / (Delta x)) + "st"(epsilon {: Delta f(x) |_(x = c):} / (Delta x))`. The standard parts of `gprime(f(c))`, `{: Delta f(x) |_(x = c):} / (Delta x)`, and `epsilon` all exist: they are `gprime(f(c))`, `fprime(c)`, and 0 respectively. This means that whole standard part exists, and has the value `gprime(f(c)) fprime(c)`. Also, `` Therefore</p>
+
+g(f(c) + D x) - g(f(c))
+-----------------------
+         D x
+
+` = `-->
+
+<h3>The inverse function theorem</h3>
+
+<p class="tbc">to be completed</p>
+
+	</body>
+</html>

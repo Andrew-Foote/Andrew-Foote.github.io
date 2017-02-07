@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Proving Statements about Natural Numbers</title>
+<style>
+body {
+	font-family: 'Times New Roman', serif;
+	font-size: 1.4em;
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
+.footnote:before {
+	content: "*";
+	padding-right: 0.5em;
+}
+
+.footnote { font-size: 0.8em; }
+
+table { width: 100%; }
+table th { text-align: left; }
+
+
+</style>
+	</head>
+	<body>
+
+<h1>Introduction</h1>
+
+<p>Natural numbers are the positive integers, i.e. 1, 2, 3, 4 and so on, excluding fractions or negative numbers. Sometimes zero is included, and sometimes not; I'll include zero in this document. The natural numbers are the most basic kind of number, and all others are essentially built up from them. For example an integer is a difference of two natural numbers: the integer <var>x</var> = <var>a</var> &minus; <var>b</var>, where <var>a</var> and <var>b</var> are natural numbers. And a rational number is a ratio of two integers.</p>
+
+<p>When you perform operations like addition and multiplication on natural numbers there are certain patterns you see: for example it appears that <var>a</var> &middot; <var>b</var> = <var>b</var> &middot; <var>a</var>*. In other words, it doesn't matter what order you multiply two numbers together in. You can try as much as you like and you will never find two natural numbers where this is not the case. But we can't test every natural number&mdash;there's an infinite amount of them. How can we be sure that the rule won't stop being true for some really high natural number? What we have to do is find a mathematical proof of this statement.</p>
+
+<p class="footnote">The &middot; symbol is just another symbol for multiplication, like &times;; I just think it looks a bit neater.</p>
+
+<p>It may seem very hard to find a way to prove something as basic as this (which is saying that multiplication is <def>commutative</def>, "commutative" just meaning you can switch the operands around and still get the same result). The important thing to be aware of is that you always have to start with certain premises. A premise is simply a statement which you already know is true. Without premises, you can't logically prove anything&mdash;you have nothing to build your statements on. On the other hand, when you have found some premises it's often quite obvious how to get from them to the proof you want.</p>
+
+<p>As an example, forget about commutativity of multiplication for a moment and consider the trigonometric identity</p>
+
+<p>tan<sup>2</sup> <var>x</var> + 1 = sec<sup>2</sup> <var>x</var></p>
+
+<p>To prove this, we take the premise that sin<sup>2</sup> <var>x</var> + cos<sup>2</sup> <var>x</var> = 1, and also that if <var>a</var> = <var>b</var>, then <var>a</var> / <var>c</var> = <var>b</var> / <var>c</var> for any numbers <var>a</var>, <var>b</var> and <var>c</var> where <var>c</var> &ne; 0. Then we can divide both sides of the equation that is our first premise by cos<sup>2</sup> <var>x</var> to get</p>
+
+<p>sin<sup>2</sup> <var>x</var> / cos<sup>2</sup> <var>x</var> + cos<sup>2</sup> <var>x</var> / cos<sup>2</sup> <var>x</var> = 1 / cos<sup>2</sup> <var>x</var></p>
+
+<p>Note that we have also tacitly included a third premise here, that (<var>a</var> + <var>b</var>) / <var>c</var> = <var>a</var> / <var>c</var> + <var>b</var> / <var>c</var>. You have to be very careful about what premises you use when making proofs. If you assume a premise is true without it being proved, then you have to prove that premise to complete the proof. We can finish the proof using another couple of premises: that <var>a</var><sup>2</sup> / <var>b</var><sup>2</sup> = (<var>a</var> / <var>b</var>)<sup>2</sup> and <var>a</var> / <var>a</var> = 1. Then we can simplify the equation to</p>
+
+<p>(sin <var>x</var> / cos <var>x</var>)<sup>2</sup> + 1 = (1 / cos <var>x</var>)<sup>2</sup></p>
+
+<p>By definition, tan <var>x</var> = sin <var>x</var> / cos <var>x</var> and sec <var>x</var> = 1 / cos <var>x</var>, so this proves the initial identity. But we did have to use no less than five premises, many which would be rather complex to prove.</p>
+
+<p>Proving something always requires some premises to be known in advance, but then those premises have to be proved too. This means that at some level, you always have to just take some premises as a given and not bother proving them. This may seem a bit weird, but it's impossible to do logic without assuming some of your premises. Those premises which you assume are called <def>axioms</def>.</p>
+
+<p>Generally we want to use as few axioms as powerful, because that makes a proof seem more complete. We could make the five premises we used in the proof of the trigonometric identity axioms, but some of them could probably be derived from others, or from definitions of the various operations.</p>
+
+<h1>Axioms for Natural Numbers</h1>
+
+<p>The <def>Peano axioms</def> are a set of axioms which allow you to prove nearly any statement about natural numbers, developed by the Italian mathematician Giuseppe Peano. The first axiom says that 0 is a natural number. This is really more like a definition than an axiom&mdash;we're saying that one natural number is called 0. All the other natural numbers will be derived from this 0.</p>
+
+<ol>
+	<li>0 is a natural number.</li>
+</ol>
+
+<p>The next four Peano axioms are basic facts of logic. Often, mathematicians don't bother stating axioms like these explicitly, considering them as part of the "background logic". However, they are included in the Peano axioms. Their point is to define the concept of equality. First, we say that for any natural <var>x</var>, <var>x</var> = <var>x</var>. That seems really obvious, but in mathematics and logic, obviousness is not a proof. It's not true for every relation; for example it's not true that <var>x</var> &lt; <var>x</var>. Nonetheless, this property, known as the <def>reflexive property</def>, isn't enough to define equality. There are other relationships between numbers that have the same property: for example <var>x</var> &le; <var>x</var>.</p>
+
+<ol start="2">
+	<li>For all natural <var>x</var>, <var>x</var> = <var>x</var>.</li>
+</ol>
+
+<p>Second, we say that if <var>y</var> = <var>x</var> then <var>x</var> = <var>y</var>; the items in an equality can be flipped around. This means equality is <def>symmetric</def>. This distinguishes the equality relation from the inequalities. Also, if <var>x</var> = <var>y</var> and <var>y</var> = <var>z</var>, then <var>x</var> = <var>z</var>: equality is <def>transitive</def>. Lastly, we say that if <var>x</var> is a natural number and <var>x</var> = <var>y</var>, then <var>y</var> is a natural number.</p>
+
+<ol start="3">
+	<li>For all natural <var>x</var> and <var>y</var>, <var>y</var> = <var>x</var> &rArr; <var>x</var> = <var>y</var>.</li>
+	<li>For all natural <var>x</var>, <var>y</var> and <var>z</var>, (<var>x</var> = <var>y</var> and <var>y</var> = <var>z</var>) &rArr; <var>x</var> = <var>z</var>.</li>
+</ol>
+
+<p>Now, we say that every natural number has a <def>successor</def>. If <var>n</var> is a natural number, its successor is written <var>S</var>(<var>n</var>). This successor is also a natural number.</p>
+
+<ol start="5">
+	<li>For all natural <var>x</var>, <var>S</var>(<var>x</var>) is a natural number.</li>
+</ol>
+
+<p>So, the natural numbers also contain the successor of 0, which we could call 1. But how we do we know that 0 &ne; 1? None of our axioms so far disallow that. To prove that 1 is not 0 we'll have to add another one. We simply say that no matter what <var>x</var> is, <var>S</var>(<var>x</var>) is definitely not 0. This is equivalent to saying zero is the first natural number.</p>
+
+<ol start="6">
+	<li>For all natural <var>x</var>, <var>S</var>(<var>x</var>) &ne; 0.</li>
+</ol>
+
+<p>So 1 is definitely a distinct natural number. But is <var>S</var>(1) distinct from 1? Well, obviously it can't be zero, but if it was 1 that wouldn't violate any of our axioms. So what we do is say that the function giving you the successor of a natural number is a one-to-one function&mdash;different inputs always give you different outputs. In other words,</p>
+
+<ol start="7">
+	<li>For all natural <var>x</var> and <var>y</var>, <var>x</var> = <var>y</var> &rArr; <var>S</var>(<var>x</var>) = <var>S</var>(<var>y</var>).</li>
+</ol>
+
+<p>We can now prove that <var>S</var>(1), which we will give the symbol 2, is distinct from 1. Because if it was the case that <var>S</var>(1) = 1, then <var>S</var>(1) = <var>S</var>(0) (because 1 = <var>S</var>(0), and because equality is transitive) and therefore, by axiom 7, 1 = 0. That's a contradiction, and therefore it's NOT the case that <var>S</var>(1) = 1. We could prove that 3 is distinct from 2 in a very similar way, and we could do this for every successive natural number.</p>
+
+<p>However, there are some things about natural numbers which are still a bit difficult to prove. For example, how can we be sure that 0 and its successors are all of the natural numbers? To prove this we need to make one last axiom: the most complex and also the most powerful one. This is known as the <def>axiom of induction</def>, and it says that if you have a set of numbers containing 0, and every natural number in the set has its successor in the set too, then this set contains all the natural numbers.</p>
+
+<ol start="8">
+	<li>If a set <var>K</var> exists and contains 0, and for all natural <var>x</var> in <var>K</var>, <var>S</var>(<var>x</var>) is in <var>K</var>, then <var>K</var> is the complete set of natural numbers.</li>
+</ol>
+
+<p>So the set of zero and its successors is the set of all natural numbers. The induction axiom is also key to proving many of the less obvious facts about natural numbers, such as the commutativity of multiplication. Before we do this, we're going to have to define addition and multiplication in terms of these axioms. The definitions are shown below in the table below, where <var>x</var> and <var>n</var> represent any two natural numbers.</p>
+
+<table>
+	<tr>
+		<th>Addition</th>
+		<th>Multiplication</th>
+	</tr>
+	<tr>
+		<td><var>x</var> + 0 = <var>x</var></td>
+		<td><var>x</var> &middot; 0 = 0</td>
+	</tr>
+	<tr>
+		<td><var>x</var> + <var>S</var>(<var>n</var>) = <var>S</var>(<var>x</var> + <var>n</var>)</td>
+		<td><var>x</var> &middot; <var>S</var>(<var>n</var>) = <var>x</var> &middot; <var>n</var> + <var>x</var></td>
+	</tr>
+</table>
+
+<p>These definitions are recursive&mdash;they refer to themselves&mdash;but they are perfectly valid definitions as long as we specify the answer when adding or multiplying zero. For example, by the definition of addition <var>x</var> + 1 = <var>x</var> + <var>S</var>(0) = <var>S</var>(<var>x</var> + 0). Using the definition of addition again, we see that <var>x</var> + 1 = <var>S</var>(<var>x</var>).</p>
+
+<p>We can now use the induction axiom to prove an interesting fact about addition. We already know from the definition that <var>x</var> + <var>S</var>(<var>n</var>) = <var>S</var>(<var>x</var> + <var>n</var>), which we could also write as <var>x</var> + (<var>n</var> + 1) = (<var>x</var> + <var>n</var>) + 1. We can prove that this identity holds if you substitute any other natural number instead of 1, which means addition is an <def>associative</def> operation.</p>
+
+<p>First, suppose there exists a <var>c</var> such that <var>a</var> + (<var>b</var> + <var>c</var>) = (<var>a</var> + <var>b</var>) + <var>c</var>. We know that this is the case when <var>c</var> is 1, but we'll just use <var>c</var> for now, for reasons that will become clear. We can then see that</p>
+
+<p><var>a</var> + (<var>b</var> + <var>S</var>(<var>c</var>)) = <var>a</var> + <var>S</var>(<var>b</var> + <var>c</var>)</p>
+
+<p>using the definition of addition. We can use the definition again to get</p>
+
+<p><var>a</var> + (<var>b</var> + <var>S</var>(<var>c</var>)) = <var>S</var>(<var>a</var> + (<var>b</var> + <var>c</var>))</p>
+
+<p>Now, we know that <var>a</var> + (<var>b</var> + <var>c</var>) = (<var>a</var> + <var>b</var>) + <var>c</var>&mdash;we said this had to be a property of <var>c</var>. So we can rewrite this as</p>
+
+<p><var>a</var> + (<var>b</var> + <var>S</var>(<var>c</var>)) = <var>S</var>((<var>a</var> + <var>b</var>) + <var>c</var>)</p>
+
+<p>and by using the definition in reverse we get</p>
+
+<p><var>a</var> + (<var>b</var> + <var>S</var>(<var>c</var>)) = (<var>a</var> + <var>b</var>) + <var>S</var>(<var>c</var>)</p>
+
+<p>What we have proved here is that <strong>if addition is associative for any <var>c</var>, it is also associative for <var>c</var>'s successor</strong>. Or to put it another way&mdash;given <var>a</var> and <var>b</var>, if <var>c</var> is in the set of all natural <var>c</var> for which <var>a</var> + (<var>b</var> + <var>c</var>) = (<var>a</var> + <var>b</var>) + <var>c</var> is true, so is the successor of <var>c</var>. This is one of the requirements we need to use the axiom of induction. All we need to do now is show that this set contains 0. And</p>
+
+<p><var>a</var> + (<var>b</var> + 0) = <var>a</var> + <var>b</var> = (<var>a</var> + <var>b</var>) + 0</p>
+
+<p>Therefore, this set contains all the natural numbers. In other words, addition is associative for any natural number in <var>c</var>'s position. That's how you do a <def>proof by induction</def>.</p>
+
+<p>In a very similar way, we can prove that multiplication is <def>distributive</def> over addition. That means <var>a</var> &middot; (<var>b</var> + <var>c</var>) = <var>a</var> &middot; <var>b</var> + <var>a</var> &middot; <var>c</var>. If you look at the definition of multiplication, we have <var>x</var> &middot; <var>S</var>(<var>n</var>) = <var>x</var> &middot; <var>n</var> + <var>x</var>. This could also be written as <var>x</var> &middot; (<var>n</var> + 1) = <var>x</var> &middot; <var>n</var> + <var>x</var>. Now, you already knew that <var>x</var> &middot; 1 = <var>x</var> but we haven't actually proved it yet. Nevertheless, we now have a suspicion that the definition of multiplication is just using a special case of the distributive law, and it should be easy to prove the distributive law from there.</p>
+
+<p>As before we suppose there is a <var>c</var> such that <var>a</var> &middot; (<var>b</var> + <var>c</var>) = <var>a</var> &middot; <var>b</var> + <var>a</var> &middot; <var>c</var>. Then, using its successor:</p>
+
+<p><var>a</var> &middot; (<var>b</var> + <var>S</var>(<var>c</var>)) = <var>a</var> &middot; <var>S</var>(<var>b</var> + <var>c</var>) = <var>a</var> &middot; (<var>b</var> + <var>c</var>) + <var>a</var></p>
+
+<p>We've used the definitions of both operations here to get <var>a</var> &middot; (<var>b</var> + <var>c</var>) into the equation, which we know is equal to <var>a</var> &middot; <var>b</var> + <var>a</var> &middot; <var>c</var>. So</p>
+
+<p><var>a</var> &middot; (<var>b</var> + <var>S</var>(<var>c</var>)) = (<var>a</var> &middot; <var>b</var> + <var>a</var> &middot; <var>c</var>) + <var>a</var></p>
+
+<p>Now we can use the associativity of addition to say</p>
+
+<p><var>a</var> &middot; (<var>b</var> + <var>S</var>(<var>c</var>)) = <var>a</var> &middot; <var>b</var> + (<var>a</var> &middot; <var>c</var> + <var>a</var>) = <var>a</var> &middot; <var>b</var> + <var>a</var> &middot; <var>S</var>(<var>c</var>)</p>
+
+<p>and we have proved that if multiplication is distributive over addition for any <var>c</var>, it is also distributive over addition for <var>c</var>'s successor. Now we just need to prove that it works when <var>c</var> = 0, and it does:</p>
+
+<p><var>a</var> &middot; (<var>b</var> + 0) = <var>a</var> &middot; <var>b</var> = <var>a</var> &middot; <var>b</var> + 0 = <var>a</var> &middot; <var>b</var> + <var>a</var> &middot; 0</p>
+
+<p>So multiplication is distributive over addition, although we can only be sure of this when the multiplier is on the left (since we haven't proved the commutativity of multiplication yet). From this a proof of the associativity of multiplication follows quite easily. Suppose <var>c</var> is a natural number such that <var>a</var> &middot; (<var>b</var> &middot; <var>c</var>) = (<var>a</var> &middot; <var>b</var>) &middot; <var>c</var>; then</p>
+
+<p><var>a</var> &middot; (<var>b</var> &middot; <var>S</var>(<var>c</var>)) = <var>a</var> &middot; (<var>b</var> &middot; <var>c</var> + <var>b</var>) = <var>a</var> &middot; (<var>b</var> &middot; <var>c</var>) + <var>a</var> &middot; <var>b</var></p>
+
+<p>Then we can say</p>
+
+<p><var>a</var> &middot; (<var>b</var> &middot; <var>S</var>(<var>c</var>)) = (<var>a</var> &middot; <var>b</var>) &middot; <var>c</var> + <var>a</var> &middot; <var>b</var> = (<var>a</var> &middot; <var>b</var>) &middot; (<var>c</var> + 1) = (<var>a</var> &middot; <var>b</var>) &middot; <var>S</var>(<var>c</var>)</p>
+
+<p>And to complete the proof:</p>
+
+<p><var>a</var> &middot; (<var>b</var> &middot; 0) = <var>a</var> &middot; 0 = 0 = (<var>a</var> &middot; <var>b</var>) &middot; 0</p>
+
+<p>Proving commutativity is a little more cumbersome. We have to do it in three parts. First, we prove that both addition and multiplication are commutative with 0. Even this has to be done via induction. Suppose <var>a</var> is a natural number for which <var>a</var> + 0 = 0 + <var>a</var>, and <var>a</var> &middot; 0 = 0 &middot; <var>a</var>. Then</p>
+
+<p>0 + <var>S</var>(<var>a</var>) = <var>S</var>(0 + <var>a</var>) = <var>S</var>(<var>a</var> + 0) = <var>S</var>(<var>a</var>) = <var>S</var>(<var>a</var>) + 0</p>
+<p>0 &middot; <var>S</var>(<var>a</var>) = 0 &middot; <var>a</var> + 0 = <var>a</var> &middot; 0 + 0 = 0 + 0 = 0 = <var>S</var>(<var>a</var>) &middot; 0</p>
+
+<p>Now if <var>a</var> = 0, these properties are obviously true (since 0 and <var>a</var> are the same), and therefore <var>a</var> + 0 = 0 + <var>a</var> and <var>a</var> &middot; 0 = 0 &middot; <var>a</var> for all natural <var>a</var> using the induction axion.</p>
+
+<p>To prove the commutativity of addition we must also prove it for the case with <var>b</var> = 1. So, suppose there is a natural <var>a</var> such that <var>a</var> + 1 = 1 + <var>a</var>. Then</p>
+
+<p><var>S</var>(<var>a</var>) + 1 = <var>S</var>(<var>a</var>) + <var>S</var>(0) = <var>S</var>(<var>S</var>(<var>a</var>) + 0) = <var>S</var>(<var>S</var>(<var>a</var>)) = <var>S</var>(<var>a</var> + 1) = <var>S</var>(1 + <var>a</var>) = 1 + <var>S</var>(<var>a</var>)</p>
+
+<p>We can also see that 0 + 1 = 0 + <var>S</var>(0) = <var>S</var>(0 + 0) = <var>S</var>(0) = 1 = 1 + 0. This proves that <var>a</var> + 1 = 1 + <var>a</var> for all natural <var>a</var> by induction.</p>
+
+<p>Now we can finally get to the full proof. We already know that if <var>b</var> = 0, then <var>a</var> + <var>b</var> = <var>b</var> + <var>a</var> is true. Now, using the successor of <var>b</var>:</p>
+
+<p><var>a</var> + <var>S</var>(<var>b</var>) = <var>S</var>(<var>a</var> + <var>b</var>) = <var>S</var>(<var>b</var> + <var>a</var>) = (<var>b</var> + <var>a</var>) + 1 = <var>b</var> + (<var>a</var> + 1)</p>
+
+<p>You can now see why we had to prove that <var>a</var> + 1 = 1 + <var>a</var>. Making that substitution, we get</p>
+
+<p><var>a</var> + <var>S</var>(<var>b</var>) = <var>b</var> + (1 + <var>a</var>) = (<var>b</var> + 1) + <var>a</var> = <var>S</var>(<var>b</var>) + <var>a</var></p>
+
+<p>So addition is commutative for the successor of <var>b</var>; since we know that addition is commutative for <var>b</var> = 0, this proves commutativity of addition for all natural numbers.</p>
+
+<p>For multiplication we will use a slightly different tactic. We're going to prove that multiplication can distribute over addition from the right&mdash;i.e. (<var>a</var> + <var>b</var>) &middot; <var>c</var> = <var>a</var> &middot; <var>c</var> + <var>b</var> &middot; <var>c</var>. This is quite easily proved now that we know addition is commutative. Suppose it is true for some <var>c</var>, then</p>
+
+<p>(<var>a</var> + <var>b</var>) &middot; <var>S</var>(<var>c</var>) = (<var>a</var> + <var>b</var>) &middot; <var>c</var> + (<var>a</var> + <var>b</var>) = (<var>a</var> &middot; <var>c</var> + <var>b</var> &middot; <var>c</var>) + (<var>a</var> + <var>b</var>) = (<var>a</var> &middot; <var>c</var> + <var>b</var> &middot; <var>c</var>) + (<var>b</var> + <var>a</var>) = ((<var>a</var> &middot; <var>c</var> + <var>b</var> &middot; <var>c</var>) + <var>b</var>) + <var>a</var> = (<var>a</var> &middot; <var>c</var> + (<var>b</var> &middot; <var>c</var> + <var>b</var>)) + <var>a</var> = (<var>a</var> &middot; <var>c</var> + <var>b</var> &middot; <var>S</var>(<var>c</var>)) + <var>a</var> = (<var>b</var> &middot; <var>S</var>(<var>c</var>) + <var>a</var> &middot; <var>c</var>) + <var>a</var> = <var>b</var> &middot; <var>S</var>(<var>c</var>) + (<var>a</var> &middot; <var>c</var> + <var>a</var>) = <var>b</var> &middot; <var>S</var>(<var>c</var>) + <var>a</var> &middot; <var>S</var>(<var>c</var>) = <var>a</var> &middot; <var>S</var>(<var>c</var>) + <var>b</var> &middot; <var>S</var>(<var>c</var>)</p>
+
+<p>It took quite a bit of rearrangement to get there, but now we can see that it is also true for <var>c</var>'s successor. And 0 can be <var>c</var>, since</p>
+
+<p>(<var>a</var> + <var>b</var>) &middot; 0 = 0 = 0 + 0 = <var>a</var> &middot; 0 + <var>b</var> &middot; 0</p>
+
+<p>So multiplication can distributive over addition from the right. Now we can at last prove that multiplication is commutative, i.e. <var>a</var> &middot; </var>b</var> = <var>b</var> &middot; <var>a</var>. Suppose there is a <var>b</var> for which this is true, and then</p>
+
+<p><var>a</var> &middot; <var>S</var>(<var>b</var>) = <var>a</var> &middot; <var>b</var> + <var>a</var> = <var>b</var> &middot; <var>a</var> + <var>a</var> = (<var>b</var> + 1) &middot; <var>a</var> = <var>S</var>(<var>b</var>) &middot; <var>a</var></p>
+
+<p>Since we already showed that multiplication is commutative when <var>b</var> = 0, this proves that multiplication is commutative for all natural <var>b</var>. It's not a particular nice or easily memorable proof, but there you go. We have also now proved all of the other essential properties of addition and multiplication.</p>
+
+<p>If you enjoyed reading this document, why don't you try defining exponentiation in a similar way, and proving the exponent rules? They're listed below:</p>
+
+<p>(<var>a</var> &middot; <var>b</var>)<sup><var>c</var></sup> = <var>a</var><sup><var>c</var></sup> &middot; <var>b</var><sup><var>c</var></sup></p>
+
+<p><var>a</var><sup><var>b</var> + <var>c</var></sup> = <var>a</var><sup><var>b</var></sup> &middot; <var>a</var><sup><var>c</var></sup></p>
+
+<p>(<var>a</var><sup><var>b</var></sup>)<sup><var>c</var></sup> = <var>a</var><sup><var>b</var> &middot; <var>c</var></sup></p>
+
+	</body>
+</html>

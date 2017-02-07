@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Elementary Analysis</title>
+<link type="text/css" rel="stylesheet" href="maths-style.css"/>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['`','`']]}
+});
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+<style type="text/css">
+
+body {
+	font-family: 'Times New Roman', serif;
+	font-size: 1.2em;
+	margin-left: 20%;
+	margin-right: 20%;
+	text-align: justify;
+}
+
+def { font-style: italic; }
+
+.mh { font-weight: bold; font-variant: small-caps; }
+.nh { font-weight: bold; font-style: italic; }
+</style>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+	</head>
+	<body>
+	
+<h1>
+	
+<h1>Logarithms and exponentials</h1>
+
+<p>Since the power rule cannot be used to integrate `x \in \mathbb R \setminus \{0\} \mapsto x^{-1}`, for every positive real number `a`, let
+
+\[\begin{equation}
+\ln a = \int_1^a \frac {\mathrm d t} t.
+\end{equation}\]
+
+By the fundamental theorem of calculus, `x \in (0, \infty) \mapsto \ln x` is an antiderivative of `x \in \mathbb R \setminus \{0\} \mapsto x^{-1}`. The following two theorems can be proved which give more insight into the properties of this integral.</p>
+
+<p>For every pair of positive real numbers `a` and `b`, the following manipulations show that `\ln a b = \ln a \ln b`.
+
+$$\begin{align}
+\ln a b &= \int_1^{a b} \frac {\mathrm d t} t \nonumber \\
+&= \int_1^a \frac {\mathrm d t} t + \int_a^{a b} \frac {\mathrm d t} t \nonumber \\
+&= \ln a + \int_1^b \frac {a \mathrm d u} {a u} \nonumber \\
+&= \ln a + \int_1^b \frac {\mathrm d u} u \nonumber \\
+&= \ln a + \ln b.
+\end{align}$$</p>
+
+<p>For every positive real number `a` and every rational number `b`, the following manipulations show that `\ln a^b = b \ln a`.
+
+$$\begin{align}
+\ln a^b &= \int_1^{a^b} \frac {\mathrm d t} t \nonumber \\
+&= \int_1^a \frac {b u^{b - 1} \mathrm d u} u \nonumber \\ 
+&= b \int_1^a \frac {\mathrm d u} u \nonumber \\
+&= b \ln a.
+\end{align}$$</p>
+
+<p>For every positive real number `x`, let `\log_a x` be `\frac {\ln x} {\ln a}`. This value deserves its own name because it follows from (3) that `x \in \mathbb Q \mapsto a^x` is the inverse of `y \in a^{\mathbb Q} \mapsto \log_a y`. Therefore, if we can find a set `U` of real numbers such that `y \in U \mapsto \log_a y` is a one-to-one mapping onto `\mathbb R`, it makes sense to define `x \in \mathbb R \mapsto a^x` as the inverse of `y \in U \mapsto \log_a y`. It turns out that the whole domain `(0, \infty)` is such a `U`. To see this, it suffices to show that the logarithm function is a one-to-one mapping on `\mathbb R`, because `y \in (0, \infty) \mapsto \log_a y` is a constant multiple of the logarithm function. It is easy to see that the logarithm function is one-to-one, because for every positive real number `b`, the derivative of the logarithm function is `b^{-1}`, which is positive, and therefore the logarithm function is strictly increasing. Proving that the logarithm function maps onto `\mathbb R` is more difficult; it can be derived as a consequence of the following two facts about the logarithm function's limits:
+
+$$\begin{equation}
+\lim_{x \to 0^+} \ln x = -\infty,
+\end{equation}$$
+
+$$\begin{equation}
+\lim_{x \to \infty} \ln x = \infty.
+\end{equation}$$</p>
+
+<p>Together with the fact that the logarithm function is continuous (since it is differentiable), (4) and (5) imply that the range of the logarithm function includes `(-\infty, \infty)`, i.e. `\mathbb R` itself. Although (4) and (5) are suggested by the shape of the logarithm function's graph, proving them is a non-trivial task. By the definition of the logarithm function, they are equivalent to facts about improper integrals:
+
+$$\begin{equation}
+\int_1^0 \frac {\mathrm d t} t = -\infty,
+\end{equation}$$
+
+$$\begin{equation}
+\int_1^\infty \frac {\mathrm d t} t = \infty.
+\end{equation}$$</p>
+
+By the integral test for convergence, (7) is equivalent to
+
+$$\begin{equation}
+\sum_{n = 1}^\infty \frac 1 n = \infty,
+\end{equation}$$
+
+which is a well-known result from the analysis of infinite series. We will not repeat the proof, nor the proof of the integral test, in this document. But if one accepts (5), (4) follows by the following manipulations.</p>
+
+$$\begin{align}
+\lim_{x \to 0^+} \ln x &= \lim_{x \to 0^+} (-\ln x^-1) \nonumber \\
+&= \lim_{y \to \infty} (-\ln y) \nonumber \\
+&= -\lim_{y \to \infty} \ln y \nonumber \\
+&= -\infty.
+\end{align}$$
+
+<p>This completes the proof that the logarithm function is a one-to-one mapping onto `\mathbb R`. Therefore, `x \in \mathbb R \mapsto a^x` is defined as the inverse of `y \in (0, \infty) \mapsto \log_a y`. The former function is called the exponential function to the base `a` and the latter function is called the logarithm function to the base `a`. The derivatives of these functions are given below.</p>
+
+<p>For every positive real number `b`,
+
+$$\begin{align}
+\frac {\mathrm d_b \log_a x} {\mathrm d x} &= \frac {\mathrm d_b} {\mathrm d x} \frac {\ln x} {\ln a} \nonumber \\
+&= \frac 1 {\ln a} \frac {\mathrm d_b \ln x} {\mathrm d x} \nonumber \\
+&= \frac 1 {\ln a} \frac 1 b \nonumber \\
+&= \frac 1 {b \ln a}.
+\end{align}$$</p>
+
+<p>For every real number `b`, by the inverse rule for differentiation,
+
+$$\begin{align}
+(8) \quad \frac {\mathrm d_b a^x} {\mathrm d x} &= \left( \frac {\mathrm d_b \log_a a^x} {\mathrm d a^x} \right)^{-1} \nonumber \\
+&= \left( \frac 1 {a^b \ln a} \right)^{-1} \nonumber \\
+&= a^b \ln a.
+\end{align}$$</p>
+
+<p>By (11), exponential functions are constant multiples of their derivatives. In particular, `x \in \mathbb R \mapsto e^x` is its own derivative, where `e` is the unique real number such that `\ln e = 1`. For this reason, we refer to this exponential function as <em>the</em> exponential function. Just as `\log_a x = \frac {\log x} {\log a}` for every positive real number `x`, `a^x` can be expressed in terms of `e` and `x` for every real number `x`: `a^x = e^{x \log a}`.</p>
+
+<h1>Homogeneous linear differential equations with constant coefficients</h1>
+
+<p>The fact that `x \in \mathbb R \mapsto e^x` is its own derivative enables the solution of every homogeneous linear differential equation with constant coefficients. Such an equation has the form
+
+$$\begin{equation}
+a_n f^{(n)}(x) + a_{n - 1} f^{(n - 1)}(x) + \dotsb + a_0 f(x) = 0
+\end{equation}$$
+
+where `a_n`, `a_{n - 1}`, ... and `a_0` are real numbers. In order to solve the equation, one must find an `n` times differentiable real-valued function `f` on an open interval `I` in `\mathbb R` such that for every member `x` of `I`, the equation holds. Suppose `r` is a real number and `x \in \mathbb R \mapsto e^{r x}` is such a function. By the chain rule and induction, for every integer `i` such that `0 \le i \le n`, the `i`<sup>th</sup> derivative of this function is `x \in \mathbb R \mapsto r^i e^{r x}`, so (12) in this case is equivalent to
+
+$$\begin{equation}
+a_n r^n e^{r x} + a_{n - 1} r^{n - 1} e^{r x} + \dotsb + a_0 e^{r x} = 0, \nonumber
+\end{equation}$$
+
+i.e.
+
+$$\begin{equation}
+e^{r x} \left( a_n r^n + a_{n - 1} r^{n - 1} + \dotsb + a_0 \right) = 0
+\end{equation}$$
+
+and since `e^{r x}` is not 0 for any real number `x`, the solutions of (12) for `r` are the roots of the polynomial `a_n r^n + a_{n - 1} r^{n - 1} + \dotsb + a_0` (which is called the characteristic polynomial of (12)). Therefore, for every root `r` of the characteristic polynomial, `x \in \mathbb R \mapsto e^{r x}` is a solution of (2). There may also be solutions of (9) that are not of the form `x \in \mathbb R \mapsto e^{r x}` where `r` is a real number. For example, every linear combination of solutions of (12) is also a solution of (12), due to the constant factor and sum rules of differentiation. So if `r_1`, ... and `r_k` are the roots of the characteristic polynomial, then for every set of `k` real numbers `A_1`, ... and `A_K`,
+
+$$x \in \mathbb R \mapsto \quad A_1 e^{r_1 x} + \dotsb + A_k e^{r_k x}$$
+
+is a solution of (12).</p>
+
+<p>What is more difficult is finding out whether these are the <em>only</em> solutions. We will not give a general answer to this question, but we can give in answer in the case where `n` is 1. In this case, (12) is said to be a first-order differential equation. It has the form
+
+$$\begin{equation}
+a f'(x) + b f(x) = 0
+\end{equation}$$
+
+where `a` and `b` are real numbers and `a \ne 0`. The solutions that we found above are all those of the form
+
+$$x \in \mathbb R \mapsto A e^{(b x) / a}$$
+
+where `A` is a real number, and these are, in fact, all the solutions of (14); the proof is not too difficult. Suppose `f` is a solution to (14), and let `I` be its domain. For every member `c` of `I`,
+
+$$\begin{align}
+\frac {\mathrm d_c e^{(b x) / a} f(x)} {\mathrm d x} &= e^{(b c) / a} f'(c) + f(c) \frac {\mathrm d_c e^{(b x) / a}} {\mathrm d x} \nonumber \\
+&= \frac {a e^{(b c) / a) f'(c)}} a + \frac {b f(c) e^{(b c) / a}} a \nonumber \\
+&= \frac {a e^{(b c) / a} f'(c) + b f(c) e^{(b c) / a}} a \nonumber \\
+&= \frac {(a f'(c) + b f(c)) e^{(b c) / a}} a \nonumber \\
+&= \frac 0 a \nonumber \\
+&= 0,
+\end{align}$$
+
+which means `x \in I \mapsto e^{(b x) / a} f(x)` is constant at a real number `A`, and therefore for every member `x` of `I`, `f(x) = A e^{-(b x) / a}`. This completes the proof.</p>
+
+</body>
+</html>
+
+<!--
+<h2>Second-order homogeneous linear differential equations with constant coefficients</h2>
+
+<p>In the case where `n` is 2, (12) is said to be a second-order differential equation. It will then have the form
+
+$$\begin{equation}
+a f''(x) + b f'(x) + c f(x) = 0
+\end{equation}$$
+
+where `a`, `b` and `c` are real numbers and `a \ne 0`. In this case, the characteristic polynomial is a quadratic equation, so the nature of the solutions given by the characteristic polynomial depends on its discriminant, `b^2 - 4 a c`, which we will denote `\Delta`. If `\Delta \ge 0`, we are given solutions of the form
+
+$$x \in \mathbb R \mapsto A e^{\frac {\left( \sqrt \Delta - b \right) x} {2 a}} + B e^{-\frac {\left( b + \sqrt \Delta \right) x} {2 a}}$$
+
+where `A` and `B` are real numbers. Since these solutions are not necessarily all constant multiples of one another, the strategy used above will not work. Instead, we will try a different route. Suppose `f` is an <em>analytic</em> solution to (16) and let `I` be its domain. Suppose `b` is 0, so that the equation states simply that `a f''(x) + c f(x) = 0`, i.e. `f''(x) = -\frac {c f(x)} a` for every member `x` of `I`. Let `d` be `-\frac c a`, so that `f''(x) = d f(x)`. Then by induction, for every integer `i`, we have `f^(i)(x) = d^{\frac i 2} f(x)` if `i` is even and `f^(i)(x) = d^{\frac {i - 1} 2} f'(x)` if `i` is odd. Since `f` is analytic, for every member `e` of `I`, we have
+
+$$\begin{align}
+f(x) &= \sum_{i = 0}^\infty \frac {f^{(i)}(e) (x - e)^i} {i!} \nonumber \\
+&= \sum_{i = 0}^\infty \frac {f^{(2 i)}(e) (x - e)^{2 i}} {(2 i)!} + \sum_{i = 0}^\infty \frac {f^{(2 i + 1)}(e) (x - e)^{2 i + 1}} {(2 i + 1)!} \nonumber \\
+&= \sum_{i = 0}^\infty \frac {d^i f(e) (x - e)^{2 i}} {(2 i)!} + \sum_{i = 0}^\infty \frac {d^i f'(e) (x - e)^{2 i + 1}} {(2 i + 1)!} \nonumber \\
+&= f(e) \sum_{i = 0}^\infty \frac {d^i (x - e)^{2 i}} {(2 i)!} + f'(e) \sum_{i = 0}^\infty \frac {d^i (x - e)^{2 i + 1}} {(2 i + 1)!}.$$
+
+So, `f(x)` is a linear combination of two series (which must converge since `f` is analytic). This looks promising
+
+ Suppose `f` is an <em>analytic</em> solution to (16) and let `I` be its domain. 
+
+
+ But this is, in fact, not the only solution. Note that for every real number `m` and every integer `i` such that `0 \le i`, the `i`<sup>th</sup> derivative of `x \in \mathbb R \mapsto x e^{m x}` is `x \in \mathbb R \mapsto m^{i - 1} (m x + i) e^x` by induction and the product rule; therefore, if `f` is this function, then (16) is
+
+$$-\frac b 2 \left( -\frac  \right)
+
+x e^(m x)
+-> m x e^(m x) + e^(m x) = (m x + 1) e^(m x)
+-> m (m x + 1) e^(m x) + m e^(m x) = m (m x + 2) e^(m x)
+-> m^2 (m x + 2) e^(m x) + m^2 e^(m x) = m^2 (m x + 3) e^(m x)
+-> m^3 (m x + 3) e^(m x) + m^3 e^(m x) = m^3 (m x + 4) e^(m x)
+
+
+x e^(-(b x) / (2 a)) -> -(b (x - 1) e^(-(b x) / (2 a))) / (2 a) -> (b^2 (x - 2) e^(-(b x) / (2 a))) / (4 a^2)
+
+
+$$\begin{equation}
+a (x + 2) e^x
+
+
+In the case where `\Delta > 0`, we are given two solutions,
+
+$$x \in \mathbb R \mapsto A e^{}
+
+ The solutions that we found above are all those of the form
+
+$$x \in \mathbb R \mapsto A e^{(b x) / a} + B e^{}$$
+
+where `A` is a real number. 
+
+, one might conjecture, based on this first example, that the solutions we have found are in fact the only ones. This is more difficult to investigate, since if this conjecture is true, then the solutions of (9) are not all constant multiples of one another and so the strategy used in the first-order case will not work. Instead, we will try a slightly different strategy. 
+
+since in that case the solutions are not all constant multiples of each other.
+
+ Then the following manipulations show that derivative of `x \in U \mapsto f(x) e^{(b x) / a}` is, by the product rule, `\frac {f(x) `
+
+ It has not been proven that these are the only solutions, and in fact, it can easily be seen from the constant factor and sum rules of differentiation that any linear combination of solutions to the differential equation is a solution too: so if `r_1`, ... and `r_k` are the roots of the characteristic polynomial, then for every set of `k` real numbers `A_1`, ... and `A_K`,
+
+$$A_1 e^{r_1 x} + \dotsb + A_k e^{r_k x}$$
+
+is a solution. There may be other solutions, too.</p>
+
+Consider in particular the case where `n` is 2, so that the differential equation is called a second-order differential equation. Let `a` be `a_2`, `b` be `a_1`, and `c` be `a_0` (for convenience). The differential equation is then
+
+$$a f''(x) + b f(x) + c f(x) = 0.$$
+
+Its characteristic polynomial is the quadratic `a r^2 + b r + c`. There are three cases to consider, depending on the value of the discriminant, `b^2 - 4 a c`, which will be denoted `\Delta` henceforth. If `\Delta` is 0, the only root of the characteristic polynomial is `r = -\frac b {2 a}`, so only the existence of one solution to the differential equation, `x \in \mathbb R \mapsto e^{-\frac {b x} {2 a}}`, can be confirmed. If `\Delta` is positive, the characteristic polynomial has the two roots `r_1 = \frac {\sqrt \Delta - b} {2 a}` and `r_2 = -\frac {b + \sqrt \Delta} {2 a}`, so the differential equation has the two solutions `x \in \mathbb R \mapsto e^{r_1 x}` and `x \in \mathbb R \mapsto e^{r_2 x}`. Note that this includes the case where `a = 1`, `b = 0` and `c = -1` (for then `\Delta = 4`), and in that case, the equation can be written as simply as $$f''(x) = f(x)$$, so the two solutions, which are `x \in \mathbb R \mapsto e^x` and `x \in \mathbb R \mapsto e^{-x}`, are examples of functions which are their own second derivative, and furthermore, so are any linear combinations of these two functions, namely
+
+$$A e^x + B e^{-x}$$
+
+for every pair of real numbers `A` and `B`.
+
+The most interesting case is where `\Delta` is negative. 
+
+$$f''(x) = f(x)$$
+
+so 
+
+
+ So, for every root `c` of the characteristic polynomial, `x \in \mathbb R \mapsto e^{c x}`
+
+ and `f` is the unknown, representing a function of `x`.
