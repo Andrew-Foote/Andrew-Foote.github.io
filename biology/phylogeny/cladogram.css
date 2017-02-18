@@ -1,0 +1,47 @@
+.cladogram section:not(:last-child) { border-left: 1px solid #000; }
+.cladogram section { margin-left: 1em; }
+.cladogram header { border-bottom: 1px solid #888; padding-left: 1em; }
+.cladogram section:last-child > header { border-left: 1px solid #000; }
+
+.cladogram h2, .cladogram p { margin: 0; }
+.cladogram h2 { display: inline; font-size: large; }
+.cladogram p { font-size: medium; }
+.cladogram h2 { font-weight: bold; font-variant: small-caps; }
+.cladogram h2:before { font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; }
+
+.cladogram .phylum h2 { font-style: italic; }
+.cladogram .class h2 { font-weight: normal; font-style: normal; }
+.cladogram .order h2 { font-weight: normal; font-style: italic; }
+.cladogram .family h2 { font-weight: normal; font-style: normal; font-variant: normal; }
+.cladogram .genus h2, .cladogram .species h2 { font-weight: normal; font-style: italic; font-variant: normal; }
+
+.cladogram .kingdom > header > h2:before { content: "Kingdom "; }
+.cladogram .subkingdom > header > h2:before { content: "Subkingdom "; }
+.cladogram .phylum > header > h2:before { content: "Phylum "; }
+.cladogram .subphylum > header > h2:before { content: "Subphylum "; }
+.cladogram .infraphylum > header > h2:before { content: "Infraphylum "; }
+.cladogram .superclass > header > h2:before { content: "Superclass "; }
+.cladogram .class > header > h2:before { content: "Class "; }
+.cladogram .subclass > header > h2:before { content: "Subclass "; }
+.cladogram .infraclass > header > h2:before { content: "Infraclass "; }
+.cladogram .parvclass > header > h2:before { content: "Parvclass "; }
+.cladogram .superorder > header > h2:before { content: "Superorder "; }
+.cladogram .order > header > h2:before { content: "Order "; }
+.cladogram .suborder > header > h2:before { content: "Suborder "; }
+.cladogram .infraorder > header > h2:before { content: "Infraorder "; }
+.cladogram .superfamily > header > h2:before { content: "Superfamily "; }
+.cladogram .epifamily > header > h2:before { content: "Epifamily "; }
+.cladogram .family > header > h2:before { content: "Family "; }
+.cladogram .subfamily > header > h2:before { content: "Subfamily "; }
+.cladogram .infrafamily > header > h2:before { content: "Infrafamily "; }
+.cladogram .tribe > header > h2:before { content: "Tribe "; }
+.cladogram .subtribe > header > h2:before { content: "Subtribe "; }
+.cladogram .infratribe > header > h2:before { content: "Infratribe "; }
+.cladogram .genus > header > h2:before { content: "Genus "; }
+.cladogram .subgenus > header > h2:before { content: "Subgenus "; }
+.cladogram .species > header > h2:before { content: "Species "; }
+.cladogram cite { font-style: normal; }
+.cladogram cite:before { content: "("; }
+.cladogram cite:after { content: ")"; }
+.cladogram .cn:before { content: "("; }
+.cladogram .cn:after { content: ")"; }
