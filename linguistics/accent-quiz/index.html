@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title>Accent Quiz</title>
+
+<style>
+body { margin: 0 20em; font-size: larger; text-align: justify; }
+h1 { text-align: center; border-bottom: 1px solid; }
+strong { font-style: italic; text-decoration: underline; }
+#div-show-hide-intro { text-align: center; }
+#btn-start { display: block; margin: 0 auto; padding: 0 1em; font-size: xx-large; }
+#div-quiz { text-align: center; }
+#p-quiz-item { font-size: xx-large; }
+#p-quiz-answer { font-size: large; }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+
+<script src="script.js"></script>
+
+</head>
+<body>
+
+<h1>Accent Quiz</h1>
+
+<section id="intro">
+<h2>Introduction</h2>
+
+<p>The purpose of this quiz is to identify where in the Anglosphere (the part of the world in which English is spoken as a first language) you come from, based on your accent. Each question has the same format. Two words are presented, and parts within each word are highlighted <strong>like so</strong>. You answer whether the highlighted parts sound exactly the same, or sound at all different. There are a lot of questions, but you can stop at any time you like and you should feel free to stop as soon as you get bored; the identification algorithm will make do with whatever information it has.</p>
+
+<p>The quiz does not attempt to identify the accents of people who speak English as a second language. If you do not come from the Anglosphere, you may have an accent which the quiz is not capable of identifying. But it may still be amusing to see what the quiz makes of your answers.</p>
+
+<p>The more people take the quiz, the more it improves&mdash;at the end, if you decide to do so, you can tell me where you <em>actually</em> come from, and the identification algorithm will be updated to take this information into account. However, for the first few people who take the quiz from a given region of the Anglosphere, the quiz may not do a very good job of identifying the region correctly.</p>
+
+</section>
+
+<div id="div-show-hide-intro"></div>
+
+<div id="div-quiz">
+<input id="btn-start" type="button" value="Start">
+</div>
+
+</body>
