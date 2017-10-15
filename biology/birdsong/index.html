@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>British Bird Song Player</title>
+<style>
+body { margin: 0 20em; text-align: justify; }
+#div-btn { text-align: center; }
+#btn-prev, #btn-next { font-size: x-large; }
+#btn-pp { font-size: xx-large; }
+#heading, #attr { text-align: center; }
+#img { margin: 0 auto; display: block; }
+#audio { margin: 0 auto; display: block; }
+</style>
+<script src="data.js"></script>
+<script src="script.js"></script>
+</head>
+<body>
+
+<p>This page can be used to help you learn the songs of British birds. Press the Play button below, and a playlist of British bird songs (using sound files from <a href="http://www.xeno-canto.org/">xeno-canto</a>) will begin playing, with the songs in a random order. The birds are all those of the order Passeriformes which have a page for them on the RSPB's website which links to a xeno-canto sound file. At some point I'll probably add some more birds as well as customization options.</p>
+
+<div id="div-btn">
+	<button id="btn-prev">Prev</button>
+	<button id="btn-pp"></button>
+	<button id="btn-next">Next</button>
+</div>
+
+<audio id="audio">The audio will not play on your browser.</audio>
+
+<h1 id="heading"></h1>
+
+<img id="img">
+
+<p id="attr"></p>
+
+</body>
+</html>
