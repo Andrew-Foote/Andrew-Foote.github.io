@@ -1,10 +1,13 @@
 body {
 	margin: 0 20em;
 	text-align: justify;
-	font-size: large;
 	font-family: "Gentium Plus", serif;
 }
 
 img {
 	width: 100%;
+}
+
+.nav {
+	text-align: center;
 }

@@ -77,7 +77,7 @@ var infa = {
 		}
 		this.heading.innerHTML = state.species().com_name_f() + ', <i>' + state.species().sci_name_f() + '</i>';
 		this.img.src = state.species().img_uri();
-		this.attr.innerHTML = 'Song recorded by ' + state.species().rec_author + ', available at <a href="http://www.xeno-canto.org/' + state.species().rec_number + '">xeno-canto</a>';
+		this.attr.innerHTML = 'Song recorded by ' + state.species().rec_author + ', available at <a href="http://www.xeno-canto.org/' + state.species().rec_number + '">http://www.xeno-canto.org/' + state.species().rec_number + '</a>';
 		window.document.title = state.species().com_name_f();
 	},
 
