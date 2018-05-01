@@ -5,8 +5,8 @@ function Species (sci_name, com_name, rec_author, rec_number) {
 	this.rec_number = rec_number;
 	this.com_name_f = function () { return capitalize_words(this.com_name); }
 	this.sci_name_f = function () { return capitalize(this.sci_name.replace(/-/g, ' ')); }
-	this.audio_uri = function () { return 'songs/' + this.sci_name + '.mp3'; }
-	this.img_uri = function () { return 'pics/' + this.sci_name + '.jpg'; }
+	this.audio_uri = function () { return '../songs/' + this.sci_name + '.mp3'; }
+	this.img_uri = function () { return '../pics/' + this.sci_name + '.jpg'; }
 }
 
 var species_list = [
