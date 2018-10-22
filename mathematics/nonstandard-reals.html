@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The Nonstandard Construction of the Real Numbers</title>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<style>
+body {
+	margin: 0 20em;
+	font-size: large;
+	text-align: justify;
+	line-height: 1.5em;
+}
+</style>
+</head>
+<body>
+
+$
+\newcommand{\rarr}{\rightarrow}
+\newcommand{\tril}{\triangleleft \,}
+\newcommand{\st}{{}^*}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\RR}{\mathbb R}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\gal}{gal}
+\DeclareMathOperator{\mon}{mon}
+\DeclareMathOperator{\sh}{sh}
+\newcommand{\Vni}{\mathsf V}
+\newcommand{\Sni}{\mathsf S}
+\newcommand{\Ini}{\mathsf I}
+$
+
+	<section>
+	<h2>Introduction</h2>
+
+<p>The real numbers can be constructed in a number of different ways. Most people who've taken a real analysis course are familiar with either the Dedekind cut or Cauchy sequence constructions. However, there is a third option, which we might call the Leibniz monad construction. It relies on nonstandard analysis, and involves in an essential way some of the more technical and confusing aspects of nonstandard analysis, so it's not the most suitable construction for beginners. However, it is quite simple and elegant, provided the machinery of nonstandard analysis is set up and you are comfortable with using it. Since I couldn't find a exposition of it online or in any textbooks that I found wholly satisfactory, I have tried to provide one in this post.</p>
+
+	</section>
+	<section>
+	<h2>Nonstandard Analysis</h2>
+
+<p>For convenience, I shall work in Mauro Di Nasso's <a href="https://projecteuclid.org/euclid.jsl/1190150046">*ZFC</a>, rather than in ZFC. This makes it easy to use nonstandard analysis without having to do a lot of preliminary setup.</p>
+
+<p>*ZFC is a set theory whose signature contains two primitive symbols: the membership symbol $\in$ from ZFC (which is a binary relation symbol), and a unary partial function symbol $\st$ called the <i>internalizer</i>. Every axiom of ZFC is an axiom of *ZFC, except for the axiom of foundation, and every axiom scheme of ZFC is an axiom scheme of *ZFC, with no restrictions on the formulas with which the scheme may be instantiated (so that they may contain the $\st$ symbol). *ZFC also has a number of extra axioms describing the properties of the internalizer, the most important one being the transfer axiom. Before I state these axioms, some preliminary definitions are required:</p>
+
+<ul>
+	<li>The class $\Vni$ of the sets that are either empty or disjoint from one of their members, which can be identified with the universe of ZFC with the axiom of foundation, is the domain of $\st$.</li>
+	<li>A set is <i>external-standard</i> (<i>E-standard</i> for short) if it is in $\Vni$; otherwise, it is <i>E-nonstandard</i>.</li>
+	<li>For every $A \in \Vni$, the <i>internalization</i> of $A$ is $\st A$, and for every formula $\varphi$ with E-standard parameters, the internalization $\st \varphi$ of $\varphi$ is the formula resulting from internalizing the parameters of $\varphi$.</li>
+	<li>The class $\Sni$ is the range of the internalizer.</li>
+	<li>A set is <i>internal-standard</i> (<i>I-standard</i> for short) if it is in $\Sni$; otherwise, it is <i>I-nonstandard</i>.</li>
+	<li>The class $\Ini$ is the union of $\Sni$.</li>
+	<li>A set is <i>internal</i> if it is in $\Ini$ (i.e. it is in $\st A$ for some $A \in \Vni$); otherwise, it is <i>external</i>.</li>
+	<li>For every formula $\varphi$ and every class $X$, the <i>relativization</i> $\varphi^X$ of $\varphi$ to $X$ is the formula resulting from making every quantifier in $\varphi$ range only over members of $X$, and $\varphi$ holds or is true <i>in $X$</i> if $\varphi^X$ holds.</li>
+	<li>The <i>$\in$-formulas</i> are the formulas containing no relation or function symbol other than $\in$.</li>
+</ul>
+
+<p><b>Axiom 1</b> (Transfer). An $\in$-formula $\varphi$ with E-standard parameters holds in $\Vni$ if and only if $\st \varphi$ holds in $\Ini$.</p>
+
+<p>The process of passing from $\varphi^\Vni$ to $\st \varphi^\Ini$ or vice versa, which this axiom asserts preserves truth, is called <i>applying transfer</i>.</p>
+
+<p>Although transfer applies only to $\in$-formulas, strictly speaking, we will often apply it implicitly to formulas containing relation and function symbols defined in terms of $\in$, by replacing references to those symbols by equivalent subformulas containing only $\in$.</p>
+
+<p>Here are two simple examples of how transfer can be used in a proof.</p>
+
+<p><b>Theorem 1</b>. Every I-standard set is internal.</p>
+
+<p><i>Proof</i>. Suppose $A \in \Vni$. Then $\{A\}$ is also E-standard and contains $A$. Applying transfer to the formula $A \in \{A\}$ yields $\st A \in \st \{A\}$. It follows that $\st A$ is internal. $\blacksquare$</p>
+
+<p><b>Theorem 2</b>. For every E-standard set $X$, the image of $X$ under the internalizer is a subset of $\st X$.</p>
+
+<p><i>Proof</i>. Suppose $X \in \Vni$ and $A \in X$. Then $A$ is also E-standard. Applying transfer to the formula $A \in X$ yields $\st A \in \st X$. $\blacksquare$</p>
+
+<p>Many applications of transfer make some use of the axiom below, as well as transfer proper.</p>
+
+<p><b>Axiom 2</b>. Members of internal sets are internal.</p>
+
+<p>The point of Axiom 2 is this. Suppose $\varphi$ is an $\in$-formula with E-standard parameters and $A$ is one of those parameters. If $\varphi$ contains a quantifier ranging over the members of $A$, then applying transfer to $\varphi^\Vni$ makes the quantifier range only over the internal members of $A$. But because $A$ is standard, and hence internal, each of its members is internal by Axiom 2; so the quantifier still has the same effective range as in $\varphi$.</p>
+
+<p>In particular, if every quantifier in $\varphi$ ranges only over the members of one of the parameters of $\varphi$, then by transfer, we have $\varphi^\Vni$ if and only if $\st \varphi$.</p>
+
+<p>We can now prove that the internalizer behaves nicely with respect to the familiar set operations.</p>
+
+<ul>
+	<li>For every pair of standard sets $A$ and $B$, we have
+	\begin{align*}
+		\st \{A, B\} &= \{\st A, \st B\}, \\
+		\st (A, B) &= (\st A, \st B), \\
+		\st (A \times B) &= \st A \times \st B.
+	\end{align*}</li>
+	<li>For every pair of standard sets $A$ and $B$ and every $R \subseteq A \times B$, we have $\st R \subseteq \st A \times \st B$.</li>
+	<li>Internalizations of functions are functions.</li>
+</ul>
+
+<p>To prove that for every pair of standard sets $A$ and $B$, we have $\st \{A, B\} = \{\st A, \st B\}$, apply transfer to the formula
+\begin{equation*}
+	(\forall^\Vni C)(C \in \{A, B\} \Leftrightarrow C = A \vee C = B).
+\end{equation*}
+Using the consequence of Axiom 2 described above, this yields
+\begin{equation*}
+	(\forall C)(C \in \st \{A, B\} \Leftrightarrow C = \st A \vee C = \st B),
+\end{equation*}
+so the members of $\st \{A, B\}$ are $\st A$ and $\st B$. The other proofs are similar. I'm not proving them here because it gets tedious.</p>
+
+<p>Another important thing to note, which is tedious but not difficult to prove, is that Theorem 2 can be generalized to arbitrary algebraic structures: for every algebraic structure $X$ whose underlying set, relations and functions are all E-standard, the restriction of the internalizer to $X$ is a monomorphism from the $X$ to the $\st X$ (the structure resulting from internalizing the underlying set and all the relations and functions of $X$). This means that $X$ can be identified with the range of this restriction.</p>
+
+	</section>
+
+	<section>
+	<h2>Non-Archimedean Ordered Fields</h2>
+
+<p>Now, let's forget about nonstandard analysis for a moment. For this section, suppose $X$ is an ordered field.</p>
+
+<p><b>Definition 1</b>. An $x \in X$ is <i>finite</i> if it is between two integers, and <i>infinite</i> otherwise.</p>
+
+<p><b>Proposition 1</b>. An $x \in X$ is finite if and only if it is smaller in magnitude than some integer, and infinite if and only if it is larger in magnitude than every integer.</p>
+
+<p><b>Proposition 2</b>. Every rational number is finite.</p>
+
+<p><b>Theorem 1</b>. The set of the finite members of $X$ is a subring of $X$.</p>
+
+<p><i>Proof</i>. Let $A$ be the set of the finite members of $X$. Then $\QQ \subseteq A$, so $A$ is nonempty. Suppose $x$ and $y$ are members of $A$. Then there are integers $m$ and $n$ such that $|x| < m$ and $|y| < n$. Adding the inequalities, we have $|x + y| \le |x| + |y| < m + n$, so $x + y \in A$. Multiplying the inequalities, we have $|xy| = |x||y| < mn$, so $xy \in A$. $\blacksquare$</p>
+
+<p><b>Theorem 2</b>. The set of the finite members of $X$ is an interval.</p>
+
+<p><i>Proof</i>. Suppose $x$, $y$, $z$ are members of $X$, $x$ and $z$ are finite and $x < y < z$. Then there are integers $m$ and $n$ such that $m < x$ and $z < n$. By transitivity, it follows that $m < y < n$ and hence $y$ is finite. $\blacksquare$</p>
+
+<p><b>Definition 2</b>. For every $x \in X$, the <i>galaxy</i> $\gal x$ (or $\gal_X(x)$, if we want to specify the ordered field) of $x$ is the additive coset with respect to $x$ of the set of the finite members of $X$, and <i>finite closeness</i> $\sim$ is the equivalence relation associated with these cosets.</p>
+
+<p><b>Proposition 3</b>. The galaxy of 0 is the set of the finite members of $X$, and an $x \in X$ is finite if and only if $x \sim 0$. Also, every galaxy is an interval (because every galaxy is a translate of $\gal 0$).</p>
+
+<p><b>Definition 3</b>. An $x \in X$ is (an) <i>infinitesimal</i> if it is smaller in magnitude than every positive rational number.</p>
+
+<p><b>Proposition 4</b>. Zero is infinitesimal, and a nonzero $x \in X$ is infinitesimal if and only if its reciprocal is infinite.</p>
+
+<p><b>Proposition 5</b>. No nonzero rational number is infinitesimal.</p>
+
+<p><b>Theorem 3</b>. The set of the infinitesimals in $X$ is an ideal of $\gal 0$.</p>
+
+<p><i>Proof</i>. Let $A$ be the set of the infinitesimals in $X$. Then $0 \in A$, so $A$ is nonempty. Suppose $\varepsilon$ is a positive rational number. For every pair of members $x$ and $y$ of $A$, both $|x|$ and $|y|$ are less than $\varepsilon/2$ and hence $|x + y| \le |x| + |y| < \varepsilon$, so $x + y \in A$. And for every $x \in A$ and every finite $a \in X$, there is a positive integer $n$ such that $|a| < n$; because $x$ is infinitesimal, we have $|x| < \varepsilon/n$ and hence $|ax| = |a||x| < n|x| < \varepsilon$, so $ax \in A$. $\blacksquare$</p>
+
+<p><b>Theorem 2</b>. The set of the infinitesimals in $X$ is an interval.</p>
+
+<p><i>Proof</i>. Suppose $x$, $y$, $z$ are members of $X$, $x$ and $z$ are infinite, $x < y < z$ and $\varepsilon$ is a positive rational number. Then $-\varepsilon < x$ and $z < \varepsilon$. By transitivity, it follows that $-\varepsilon < y < \varepsilon$, i.e. $|y| < \varepsilon$, and hence $y$ is infinitesimal. $\blacksquare$</p>
+
+<p><b>Definition 4</b>. For every $x \in X$, the <i>monad</i> $\mon x$ (or $\mon_X(x)$, if we want to specify the ordered field) of $x$ is the additive coset with respect to $x$ of the set of the infinitesimals in $X$, and <i>infinite closeness</i> $\approx$ is the equivalence relation associated with these cosets.</p>
+
+<p><b>Proposition 6</b>. The monad of 0 is the set of the infinitesimals in $X$, and an $x \in X$ is infinitesimal if and only if $x \approx 0$. Also, every monad is an interval (because every monad is a translate of $\mon 0$).</p>
+
+		<section>
+		<h3>Monads of Finite Elements</h3>
+
+<p>For finite members of $X$, there is a useful alternative characterization of infinite closeness.</p>
+
+<p><b>Theorem 5</b>. Every finite member of $X$ can be approximated to arbitrarily small rational error on both sides by rational numbers.</p>
+
+<p><i>Proof</i>. Suppose $x \in \gal 0$ and $\varepsilon$ is a positive rational number. Then there are integers $a$ and $b$ such that $a < x < b$. Let $n$ be an integer greater than $(b - a)/\varepsilon$, let $h = (b - a)/n$ and for every $k \in \{0, \dotsc, n\}$, let $c_k = a + kh$. Note that $h < \varepsilon$,
+\begin{equation*}
+	a = c_0 < c_1 < \dotso < c_{n - 1} < c_n = b,
+\end{equation*}
+and every term in the inequality above is rational. Let $i$ be the largest member of $\{0, \dotsc, n\}$ possible such that $c_i < x$ and let $j$ be the smallest member of $\{0, \dotsc, n\}$ possible such that $x < c_j$. Then $i \ne n$ (otherwise $b < x$) and $j \ne 0$ (otherwise $x < a$), so $x \le c_{i + 1}$ and $c_{j - 1} \le x$. Therefore
+\begin{equation*}
+	x - \varepsilon < c_{i + 1} - h = c_i < x < c_j < c_{j - 1} + h < x + \varepsilon.
+\end{equation*} $\blacksquare$</p>
+
+<p><b>Theorem 6</b>. A finite $x \in X$ is infinitely close to a $y \in X$ if and only if for every pair of rational numbers $a$ and $b$ not infinitely close to $x$ such that $a < x < b$, we have $a < y < b$.</p>
+
+<p><i>Proof</i>. Suppose $x$ and $y$ are members of $X$ and $x$ is finite.</p>
+
+<p>First, suppose $x \approx y$, $a$ and $b$ are rational numbers not infinitely close to $x$, and $a < x < b$. Then $x - a$ and $b - x$ are not infinitesimal, so there are positive rational numbers $r$ and $s$ such that $\varepsilon < x - a$ and $\delta < b - x$. Because $x - y$ is infinitesimal, it is smaller in magnitude than both $\varepsilon$ and $\delta$, and hence
+\begin{equation*}
+	a = x - (x - a) < x - \varepsilon < y < x + \delta < x + (b - x) = b.
+\end{equation*}</p>
+
+<p>Second, suppose that for every pair of rational numbers $a$ and $b$ not infinitely close to $x$ such that $a < x < b$, we have $a < y < b$; and suppose $\varepsilon$ is a positive rational number. By Theorem 5, there are rational numbers $r$ and $s$ such that
+\begin{equation*}
+	x - \varepsilon < r < x < s < x + \varepsilon.
+\end{equation*}
+Neither $x - \varepsilon$ nor $x + \varepsilon$ is infinitely close to $x$ (because $\varepsilon$ is not infinitesimal); therefore we have $x - \varepsilon < y < x + \varepsilon$, i.e. $|x - y| < \varepsilon$. $\blacksquare$</p>
+
+		</section>
+	</section>
+	<section>
+	<h2>Archimedean Ordered Fields</h2>
+
+<p><b>Definition 4</b>. An ordered field $X$ is <i>Archimedean</i> if each of its members is finite.</p>
+
+<p><b>Proposition 7</b>. For every ordered field $X$, the statements below are equivalent.</p>
+
+<ul>
+	<li>$X$ is Archimedean.</li>
+	<li>No nonzero member of $X$ is infinitesimal.</li>
+	<li>The members of $X$ are finitely close.</li>
+	<li>Infinite closeness and equality coincide in $X$.</li>
+	<li>For every $x \in X$, there is a greatest integer less than or equal to $x$.</li>
+</ul>
+
+<p><b>Definition 5</b>. For every Archimedean ordered field $X$ and every $x \in X$, the <i>integer part</i> $[x]$ of $x$ is the greatest integer less than or equal to $x$.</p>
+
+<p><b>Proposition 8</b>. The ordered field $\QQ$ is Archimedean.</p>
+
+<p><b>Axiom 1</b>. The ordered field $\st \QQ$ is non-Archimedean.</p>
+
+<p><b>Remark 1</b>. This does not contradict the transfer principle because the assertion &ldquo;$\QQ$ is Archimedean&rdquo; unpacks to &ldquo;every member of $\QQ$ is between two integers&rdquo;, and applying transfer to this yields &ldquo;every member of $\st \QQ$ is between two <em>hyperintegers</em>&rdquo;, not &ldquo;every member of $\st \QQ$ is between two integers&rdquo;.</p>
+
+<p><b>Definition 5</b>. For every ordered field $X$, the <i>monad field</i> of $X$ is the quotient ordered field of $\mon_X(0)$ in $\gal_X(0)$, and $\mon_X$ is the associated field epimorphism (i.e. the function $f$ on $\gal_X(0)$ such that for every $x \in \gal_X(0)$, we have $f(x) = \mon_X(x)$).</p>
+
+<p><b>Remark 1</b>. The quotient has a field structure because $\mon_X(0)$ is an ideal of $\gal_X(0)$, and it can be ordered because $\mon_X(0)$ is an interval.</p>
+
+<p><b>Proposition 9</b>. For every ordered field $X$:</p>
+
+<ul>
+	<li>For every pair of members $x$ and $y$ of $\gal_X(0)$, we have
+	\begin{align*}
+		\mon_X(x) < \mon_X(y) &\iff x < y \wedge x \not \approx y, \\
+		\mon_X(x) \le \mon_X(y) &\iff x < y \vee x \approx y.
+	\end{align*}</li>
+	<li>For every Archimedean subfield $A$ of $X$, the restriction of $\mon_X$ to $A$ is an ordered field monomorphism from $A$ to $Y$ (because infinite closeness and equality coincide in $A$), so we can identify $X$ with $\mon_X^\rarr(A)$. In particular, we can identify $\QQ$ with $\mon_X^\rarr(\QQ)$.</li>
+</ul>
+
+<p><b>Theorem 7</b>. Monad fields are Archimedean.</p>
+
+<p><i>Proof</i>. Suppose $X$ is an ordered field, let $Y$ be its monad field and suppose $A \in Y$. Then there is an $x \in \gal_X(0)$ such that $A = \mon_X(x)$. Because $x$ is finite in $X$, there are rational numbers $a$ and $b$ such that $a < x < b$. If $a \approx x$, replace $a$ with $a - 1$; if $x \approx b$, replace $b$ with $b + 1$. Then $a < x < b$ still holds, but $a \not \approx x \not \approx b$ and hence $\mon_X(a) < A < \mon_X(b)$ holds in $Y$. Because we can identify $\mon_X(a)$ and $\mon_X(b)$ with $a$ and $b$ respectively, it follows that $Y$ is Archimedean. $\blacksquare$</p>
+
+	</section>
+	<section>
+	<h2>Hyperreal Numbers</h2>
+
+<p><b>Definition 5</b>. The ordered field $\RR$ is the monad field of $\st \QQ$, the <i>real numbers</i> are the members of $\RR$, and the <i>hyperreal numbers</i> are the members of $\st \RR$.</p>
+
+<p>Let $f$ be the internalization of $\mon_{\st \QQ} \tril \QQ$. By transfer, this function is an ordered field monomorphism from $\st \QQ$ to $\st \RR$, so we can identify $\st \QQ$ with the range of $f$.</p>
+
+<p>Given this identification, for every $x \in \QQ$, we can identify $f(x)$ with $\mon_{\st \QQ}(x)$. However, $f$ does not coincide with $\mon_{\st \QQ}$ on $\st \QQ$ as a whole! Theorem 8 describes the relationship between the two functions.</p>
+
+<p><b>Theorem 8</b>. For every finite hyperrational number $x$, we have $\mon_X(x) \approx x$ (given the identification made in Proposition 10).</p>
+
+<p><i>Proof</i>. Suppose $x$ is a finite hyperrational number, let $a = \mon_{\st \QQ}(x)$ and suppose $r$ and $s$ are rational numbers not infinitely close to $x$ and $r < x < s$. Let $f = \st (\mon_{\st \QQ} \tril \QQ)$. Then $f(r) = \mon_{\st \QQ}(r)$ and $f(s) = \mon_{\st \QQ}(s)$, so by Proposition 9, we can identify $r$ and $s$ with their values under $f$. Because $f$ is order-preserving, it follows that $r < a < s$. Therefore, by Theorem 6, we have $x \approx a$. $\blacksquare$</p>
+
+<p><b>Theorem 9</b>. Every hyperreal number is infinitely close to a hyperrational number.</p>
+
+<p><i>Proof</i>. Suppose $x \in \st \RR$ and let $n$ be an infinite hypernatural number. Then
+\begin{equation*}
+	\frac {\lfloor nx \rfloor} n - x = \frac {\lfloor nx \rfloor - nx} n < \frac 1 n \approx 0,
+\end{equation*}
+and $\lfloor nx \rfloor/n$ is rational.</p>
+
+<p><b>Remark 3</b>. The floor function on $\st \RR$ referred to in this proof is the natural extension of the floor function on $\RR$ (which is well-defined because $\RR$ is Archimedean). It has the same properties as the floor function on $\RR$, by transfer.</p>
+
+<p><b>Theorem 10</b> (Leibniz Completeness). Every finite hyperreal number is infinitely close to a real number.</p>
+
+<p><i>Proof</i>. Suppose $x \in \gal_{\st \RR}(0)$. By Theorem 9, there is an $r \in \st \QQ$ infinitely close to $x$. Therefore, by Theorem 8, we have $x \approx r \approx \mon_{\st \QQ}(r)$.</p>
+
+<p><b>Remark 4</b>. Because $\RR$ is Archimedean, every finite hyperreal number is infinitely close to <em>exactly one</em> real number.</p>
+
+<p><b>Definition 6</b>. For every $x \in \gal_{\st \RR}(0)$, the <i>shadow</i> $\sh x$ of $x$ is the unique real number infinitely close to $x$.</p>
+
+	</section>
+	<section>
+	<h2>Completeness</h2>
+
+<p>In order to convince you that the real numbers as constructed here are isomorphic to the real numbers as constructed normally, I shall prove the Cauchy completeness of the real numbers as constructed here.</p>
+
+<p><b>Definition 7</b>. A real-valued sequence $x$ is <i>Cauchy</i> if all the hyperreal numbers of the form $\st x(n)$, where $n$ is an infinite hypernatural number, are infinitely close.</p>
+
+<p><b>Theorem 11</b>. A real-valued sequence $x$ is Cauchy if and only if for every positive $\varepsilon \in \RR$, there is a positive integer $m$ such that for every pair of integers $p$ and $q$ greater than $m$, we have $|x(p) - x(q)| < \varepsilon$. $\blacksquare$</p>
+
+<p><i>Proof</i>. Suppose $x$ is a real-valued sequence.</p>
+
+<p>First, suppose $x$ is Cauchy and $\varepsilon$ is a positive real number. Let $m$ be an infinite hypernatural number. Then for every pair of hyperintegers $p$ and $q$ greater than $m$, we have $\st x(p) \approx \st x(q)$ and hence $|\st x(p) - \st x(q)| < \varepsilon$. By transfer, it follows that there is a positive integer $m$ such that for every pair of integers $p$ and $q$ greater than $m$, we have $|x(p) - x(q)| < \varepsilon$. $\blacksquare$</p>
+
+<p>Second, suppose that for every positive $\varepsilon \in \RR$, there is a positive integer $m$ such that for every pair of integers $p$ and $q$ greater than $m$, we have $|x(p) - x(q)| < \varepsilon$; and suppose $p$ and $q$ are infinite hypernatural numbers. For every positive $\varepsilon \in \RR$, we have by transfer that there is a positive hyperinteger $m$ such that for every pair of hyperintegers $P$ and $Q$ greater than $m$, we have $|x(P) - x(Q)| < \varepsilon$. In particular, $|x(p) - x(q)| < \varepsilon$. This holds whatever $\varepsilon$ is, so it follows that $x(p) \approx x(q)$. $\blacksquare$</p>
+
+<p><b>Definition 8</b>. A real-valued sequence $x$ is <i>bounded</i> if for every infinite hypernatural number $n$, we have $\st x(n) \sim 0$.</p>
+
+<p><b>Theorem 12</b>. Every Cauchy real-valued sequence is bounded.</p>
+
+<p><i>Proof</i>. Suppose $x$ is a Cauchy real-valued sequence. Then there is a positive integer $m$ such that for every pair of integers $p$ and $q$ greater than $m$, we have $|x(p) - x(q)| < 1$. In particular, for every integer $n > m$, we have $|x(n) - x(m + 1)| < 1$. By transfer, it follows that for every hyperinteger $n > m$, we have $|\st x(n) - x(m + 1)| < 1$ and hence $\st x(n) \sim x(m + 1) \sim 0$. $\blacksquare$</p>
+
+<p><b>Definition 9</b>. For every real-valued sequence $x$, the <i>limit</i> of $x$ is the common shadow of the hyperreal numbers of the form $\st x(n)$, where $n$ is an infinite hypernatural number, if this common shadow exists.</p>
+
+<p><b>Theorem 14</b> (Cauchy Completeness). A real-valued sequence has a limit if and only if it is Cauchy.</p>
+
+<p><i>Proof</i>. Suppose $x$ is a real-valued sequence.</p>
+
+<p>If $x$ has a limit $a$, then for every pair of infinite hypernatural numbers $m$ and $n$, we have $\st x(m) \approx a \approx \st x(n)$. Therefore $x$ is Cauchy.</p>
+
+<p>If $x$ is Cauchy, then all the hyperreal numbers of the form $\st x(n)$, where $n$ is an infinite hypernatural number, are infinitely close. Because $x$ is bounded, they are also finite. It follows that they have a common shadow. $\blacksquare$</p>
+
+<p><b>Theorem 13</b>. For every real-valued sequence $x$, an $a \in \RR$ is a limit of $x$ if and only if for every positive $\varepsilon \in \RR$, there is a positive integer $m$ such that for every integer $n > m$, we have $|x(n) - a| < \varepsilon$.</p>
+
+<p><i>Proof</i>. Suppose $x$ is a real-valued sequence.</p>
+
+<p>First, suppose $a$ is a limit of $x$ and $\varepsilon$ is a positive real number. Let $m$ be an infinite hypernatural number. Then for every hyperinteger $n > m$, we have $\st x(n) \approx a$ and hence $|\st x(n) - a| < \varepsilon$. By transfer, it follows that there is a positive integer $m$ such that for every integer $n > m$, we have $|x(n) - a| < \varepsilon$.</p>
+
+<p>Second, suppose that for every positive $\varepsilon \in \RR$, there is a positive integer $m$ such that for every integer $n > m$, we have $|x(n) - a| < \varepsilon$; and suppose $n$ is an infinite hypernatural number. For every positive $\varepsilon \in \RR$, we have by transfer that there is a positive hyperinteger $m$ such that for every hyperinteger $N > m$, we have $|\st x(N) - a| < \varepsilon$. In particular, $|\st x(n) - a| < \varepsilon$. This holds whatever $\varepsilon$ is, so it follows that $\st x(n) \approx a$. $\blacksquare$</p>
+
+	</section>
+
+</body>
+</html>
