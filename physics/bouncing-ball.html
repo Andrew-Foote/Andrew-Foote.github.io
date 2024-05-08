@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The trajectory of a bouncing ball</title>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+body {
+	max-width: 40em;
+	margin: 0 auto;
+	text-align: justify;
+	font-size: x-large;
+}
+
+.asterism { text-align: center; margin: 2em 0 }
+video, iframe { margin: 0 auto; display: block; }
+</style>
+</head>
+<body>
+<h1>The trajectory of a bouncing ball</h1>
+<p>
+Consider an idealized model of a ball bouncing on the ground, where the ball is falling along a line normal to the ground, so that it remains on this line as it bounces, allowing us to treat its position and velocity as one-dimensional quantities. The only force acting on the ball while it is in the air is gravity, which subjects it to a constant downwards acceleration \(g\). When the ball hits the ground, it is instantaneously deflected upwards, resulting in its velocity being scaled by a factor of \(-R\), where \(R\) is a constant strictly between 0 and 1 (the <a href="https://en.wikipedia.org/wiki/Coefficient_of_restitution">coefficient of restitution</a>, or to put it in more ordinary terms, the "amount of bounciness").
+<p>
+At what point does the ball stop bouncing?
+<p>
+The answer I expected was that the ball would never stop bouncing. I thought it would keep bouncing forever, with the bounces getting smaller and smaller in height, to a point where they were practically negligible, but I didn't think there would be any definite point where it would stop altogether. 
+<p>
+But it turns out that this is incorrect. While the ball does indeed bounce an infinite number of times, with the bounces getting smaller and smaller in height, that doesn't mean it keeps bouncing forever. The bounces get smaller and smaller not only in height, but also in duration, and the sum of their durations converges to a finite limit, meaning there is a time \(T\) such that the sum of their durations is always less than, but can be made arbitrarily close to \(T\). You can even calculate \(T\) using the following formula:
+\begin{equation} \label{time-bouncing-stops} T = t_1 - \frac {2 u_1} {g(1 - R)}, \tag{1} \end{equation}
+Here, \(t_1\) is the time at which the first bounce begins and \(u_1\) is the velocity of the ball at the start of this first bounce. (The formula does require you to know \(t_1\) and \(u_1\); it is possible to calculate \(t_1\) and \(u_1\) from the ball's initial position and velocity, but the formula is a lot simpler and easier to understand if it's left in terms of \(t_1\) and \(u_1\) rather than those initial values.)
+<p class="asterism">
+⁂
+<p>
+Here's how this formula can be derived. First, observe that between one bounce and the next, the ball moves with a constant acceleration \(g\). Also, the ball's position (or rather, the position of its bottom point) at the start of the bounce will be the position of the ground, which we'll write as \(h\). So if we consider a bounce starting at a time \(t_0\), where the ball has velocity \(u_0\) as it begins the bounce, the ball's velocity \(v\) and position \(s\) at any subsequent time \(t\) before the next bounce will be given by the equations
+\begin{align*}
+	v &= u_0 + g(t - t_0), \\
+	s &= h + u_0(t - t_0) + \frac {g(t - t_0)^2} 2.
+\end{align*}
+<p>
+The next time the ball bounces, its position will be \(h\) again, so to find the time the current bounce ends and the next bounce begins, we should solve the equation \(s = h\). Using the equation for \(s\) above, we can write \(s = h\) as an equivalent quadratic equation in \(t - t_0\):
+$$ \frac {g(t - t_0)^2} 2 + u_0(t - t_0) = 0. $$
+Since this equation has no constant term, it can be easily solved by factorising the LHS:
+$$ (t - t_0)\left( \frac {gt} 2 + u_0 \right) = 0 $$
+From this we see that \(s = h\) when \(t = t_0\) (which we already knew) and also that \(s = h\) when
+$$ t = t_0 - \frac {2u_0} g. $$
+This \(t\) is greater than \(t_0\), since the ball moves away from the ground as it bounces, so the velocity \(u_0\) at the start of the current bounce is nonzero and has the opposite sign to \(g\). Hence we can interpret \(t\) as the time of the next bounce. Accordingly, the duration of the current bounce is \(t - t_0 = -2u_0/g\). Furthermore, substituting \(t = t_0 - 2u_0/g\) into the equation for \(v\) gives us that the velocity at the end of the bounce is \(-u_0\) (this is also obvious if you visualize the bounce as a parabola). Hence the velocity at the start of the next bounce will be \(Ru_0\). 
+<p>
+To summarize: if the ball has velocity \(u_0\) at the start of a bounce, then the duration of the bounce will be \(-2u_0/g\) and the velocity of the start of the next bounce will be \(Ru_0\).</p>
+<p>
+If we now consider the full sequence of bounces, we have that the velocities at the start of each bounce are in a <a href="https://en.wikipedia.org/wiki/Geometric_progression">geometric progression</a>. So we can give a general formula for the velocity \(u_n\) at the start of the \(n\)th bounce (for \(n \ge 1\)):
+$$ u_n = R^{n - 1} u_1. $$
+Accordingly, the duration of the \(n\)th bounce will be \(-2 u_n/g = -2 R^{n - 1} u_1/g\). Hence the total time taken by the first \(n\) bounces (not including any time before the first bounce) will be
+$$ \left( -\frac {2 u_1} g \right) + \left( -\frac {2 R u_1} g \right) + \dotsb + \left( -\frac {2 R^{n - 1} u_1} g \right), $$
+This is a geometric series, which can also be written as
+$$ -\frac {2u_1(1 - R^n)} {g(1 - R)}. $$
+Given that \(0 < R < 1\), we can take the limit as \(n\) approaches infinity, giving us the following expression for the total duration of the bounces:
+$$ -\frac {2u_1} {g(1 - R)}. $$
+The \(t_1\) term in \eqref{time-bouncing-stops} comes from the fact that there's also some time before the first bounce.
+<p class="asterism">
+⁂
+<p>
+What about \(t_1\) and \(u_1\)? How do we calculate them? It's not that much more complicated. We use the same quadratic equation as before, only now the ball's initial position is not necessarily \(h\), but some arbitrary \(r\). If we say that the positive direction is upwards, then we can assume that \(h \le r\), because the ball can't be below the ground. We also have an arbitrary initial velocity \(u\), and this doesn't have to be positive like the velocity at the start of a bounce. It can be negative, positive or zero. So the equations of motion for the ball from time 0 up to the time the first bounce begins are:</p>
+\begin{align*}
+	v &= u + gt, \\
+	s &= r + ut + \frac {gt^2} 2.
+\end{align*}
+The equation \(s = h\) now comes out as the quadratic equation
+$$ \frac {gt^2} 2 + ut + r - h = 0. $$
+The discriminant of this equation is
+$$ \Delta = u^2 - 2g(r - h). $$
+Since \(h \le r\) and \(g < 0\), we have \(-2g(r - h) \ge 0\); hence \(\Delta\) is always non-negative, meaning the equation always has at least one root. Moreover if it only has one root, then \(\Delta = 0\), which implies that \(r = h\) and \(u = 0\), meaning that the ball starts at rest (so it doesn't actually bounce at all). So outside of this edge case, there will be two distinct roots, which are
+$$ \tau_1 = \frac {-u - \sqrt \Delta} g \quad \text{and} \quad \tau_2 = \frac {-u + \sqrt \Delta} g. $$
+Since \(\sqrt \Delta > 0\) and \(g < 0\), we have \(\tau_2 < \tau_1\). Moreover, since \(u^2 \le \Delta\), we have \(|u| \le \sqrt \Delta\), so \(-u - \sqrt \Delta \le -u - |u|\) and \(-u + \sqrt \Delta \ge -u + |u|\) and hence \(\tau_1 \ge (-u - |u|)/g\) and \(\tau_2 \le (-u + |u|)/g\). If \(u = 0\), this means that \(\tau_1 \ge 0\) and \(\tau_2 \le 0\). If \(u > 0\), this means that \(\tau_1 \ge -2u/g > 0\) and \(\tau_2 \le 0\). If \(u < 0\), this means that \(\tau_1 \ge 0\) and \(\tau_2 \le -2u/g < 0\). Whatever the case, we have that \(\tau_1\) is non-negative and \(\tau_2\) is non-positive. So we can interpret the two roots as endpoints of a "0th bounce" which is already in progress initially.
+<p>
+In particular, we have that the time the first bounce starts, \(t_1\), is the time the 0th bounce ends, \(\tau_1\). That is:
+$$ t_1 = -\frac {u + \sqrt \Delta} g = -\frac {u + \sqrt{u^2 - 2g(r - h)}} g. $$
+As for \(u_1\), we can substitute \(t = t_1\) into the equation \(v = u + gt\) to get the velocity at the end of the 0th bounce: \(-\sqrt \Delta\). The velocity at the start of the 1st bounce will be this scaled by \(-R\), i.e.
+$$ u_1 = R \sqrt \Delta. $$
+<p class="asterism">
+⁂
+<p>
+I started investigating this problem because I wanted to program a simulation of a ball bouncing on the ground. For this purpose, it would be ideal to have a function which, given a time \(t\), tells you what the ball's position will be. The derivations above already give us almost all the information we need to do this. The only missing thing is a way to determine what number bounce is in progress at time \(t\). For every integer \(n\), let
+$$ t_n = t_1 - \frac {2u_1(1 - R^{n - 1})} {g(1 - R)}, $$
+so that \(t_n\) is the time the \(n\)th bounce starts. Given a time \(t \ge t_1\), we want to find the unique integer \(n\) such that \(t_n \le t < t_{n + 1}\). Well, this chain of inequalities can also be written as
+$$ t_1 - \frac {2u_1(1 - R^{n - 1})} {g(1 - R)} \le t < t_1 - \frac {2u_1(1 - R^n)} {g(1 - R)}. $$
+Doing some rearrangement, using the facts that \(-u_1/g\) and \(1 - R\) are positive, we get the equivalent inequality
+$$ 1 - R^{n - 1} \le -\frac {g(t - t_1)(1 - R)} {2u_1} < 1 - R^n. $$
+If we subtract each part of this chain of inequalities from 1, and then take its logarithm in base \(R\), the order of the parts is preserved (because these two functions are both strictly decreasing, given that \(R < 1\), and hence their composition is strictly increasing). So the chain of inequalities can also be written as
+$$ n - 1 \le \log_R \left( 1 + \frac {g(t - t_1)(1 - R)} {2u_1} \right) < n. $$
+Now for each real number \(x\), the "floor-plus-one" \(\lfloor x \rfloor + 1\) of \(x\) is the unique integer \(n\) such that \(n - 1 \le x < n\); hence we can conclude that
+$$ n = \left \lfloor \log_R \left( 1 + \frac {g(t - t_1)(1 - R)} {2u_1} \right) \right \rfloor + 1. $$
+It is then straightforward to give a formula for \(s\), using the fact that the \(n\)th bounce starts at time \(t_n\), and the ball's velocity as it begins this bounce is \(u_n\).
+$$ s = h + u_n (t - t_n) + \frac {g(t - t_n)^2} 2. $$
+<p>
+Here's a video of the resulting simulation:
+<p>
+<video controls width="500">
+	<source src="bouncyball.mp4">
+</video>
+<p>
+You can see the code for this on <a href="https://github.com/Andrew-Foote/exact-physics-sims/blob/master/bouncing_ball.py">Github</a>. (The code actually accounts for various edge cases which aren't covered here, such as zero gravity or gravity that pushes upwards instead of downwards.)
+<p>
+Here's a graph of an example trajectory, made in <a href="https://www.desmos.com/calculator/djofb0eckf">Desmos</a>:
+<p>
+<iframe src="https://www.desmos.com/calculator/djofb0eckf?embed" width="500" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+<p>
+The vertical line is where the bouncing stops.
